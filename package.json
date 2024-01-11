@@ -1,17 +1,28 @@
 {
   "name": "t1-asset-tracking-backend",
   "version": "1.0.0",
-  "description": ":)",
+  "description": "Asset Tracking Backend Service: A robust and scalable Node.js server providing RESTful API services for asset management, including authentication, data storage, notifications, and integration with external services like Google APIs.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --",
+    "start": "node server.js",
+    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json t1-asset-tracking-backend.service .env deploy"
   },
+  "keywords": [
+    "node.js",
+    "express",
+    "sequelize"
+  ],
+  "author": "Team 1",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SEV-POWERHOUSE/t1-asset-tracking-backend.git"
   },
-  "author": "",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SEV-POWERHOUSE/t1-asset-tracking-backend/issues"
+  },
+  "homepage": "https://github.com/SEV-POWERHOUSE/t1-asset-tracking-backend#readme",
   "dependencies": {
     "connect-history-api-fallback": "^2.0.0",
     "cors": "^2.8.5",
@@ -25,9 +36,5 @@
     "parser": "^0.1.4",
     "sequelize": "^6.33.0",
     "supertest": "^6.3.3"
-  },
-  "bugs": {
-    "url": "https://github.com/SEV-POWERHOUSE/t1-asset-tracking-backend/issues"
-  },
-  "homepage": "https://github.com/SEV-POWERHOUSE/t1-asset-tracking-backend#readme"
+  }
 }
