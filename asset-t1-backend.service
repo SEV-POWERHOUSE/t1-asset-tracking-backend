@@ -1,0 +1,14 @@
+[Unit]
+Description=NodeJS Asset Tracking App
+After=network.target
+ 
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/nodeapps/asset/t1/
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+ 
+[Install]
+WantedBy=multi-user.target
+
