@@ -44,7 +44,7 @@
 //                     from: req.body.from,
 //                     to: req.body.to,
 //                 }
-    
+
 //                 const result = await emailSender.denialEmail(emailDetails)
 //                 res.status(200).send(result)
 //             } catch (error) {

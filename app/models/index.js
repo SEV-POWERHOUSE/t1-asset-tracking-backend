@@ -19,10 +19,8 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 
-
 // Users and Sessions
-db.user.hasMany(db.session, { foreignKey: 'userId', onDelete: 'CASCADE' });
-db.session.belongsTo(db.user, { foreignKey: 'userId', onDelete: 'CASCADE' });
-
+db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
+db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
 
 module.exports = db;
