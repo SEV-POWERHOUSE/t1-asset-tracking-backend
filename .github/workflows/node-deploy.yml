@@ -24,10 +24,10 @@ jobs:
           ref: dev
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.11.0'
+          node-version: "20.11.0"
       - run: npm install
 
-      - name: Create .env file 
+      - name: Create .env file
         run: |
           touch .env
           echo "DB_HOST='$DB_HOST'" > .env

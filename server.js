@@ -32,7 +32,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
 
-
 // Set port, listen for requests
 const PORT = process.env.PORT || 3031;
 if (process.env.NODE_ENV !== "test") {
