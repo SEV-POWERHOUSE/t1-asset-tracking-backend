@@ -25,6 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 require("./app/routes/auth.routes.js")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/userGroup.routes")(app);
+
 // require("./app/routes/email.routes")(app);
 
 // Simple route
