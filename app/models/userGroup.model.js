@@ -13,6 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       },
     },
     {
+      tableName: 'userGroups',
       timestamps: false,
     }
   );
