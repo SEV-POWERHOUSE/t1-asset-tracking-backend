@@ -10,7 +10,7 @@ const db = require("./app/models");
 db.sequelize.sync();
 
 var corsOptions = {
-  origin: ["http://localhost:8081", "https://asset.eaglesoftwareteam.com"],
+  origin: ["http://localhost:8081", "https://project3.eaglesoftwareteam.com"],
   // credentials: true, // You might need this if your front-end uses credentials like cookies or auth headers
 };
 
