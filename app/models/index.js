@@ -17,12 +17,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
-db.session = require("./session.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
+db.session = require("./session.model.js")(sequelize, Sequelize);
 
 // User and UserGroup
-db.user.belongsTo(db.userGroup, { foreignKey: "userGroupId", as: "UserGroup" });
-db.userGroup.hasMany(db.user, { foreignKey: "userGroupId", as: "Users" });
+db.userGroup.hasMany(db.user, { foreignKey: "userGroupId", onDelete: "SET NULL" });
+db.user.belongsTo(db.userGroup, { foreignKey: "userGroupId", onDelete: "SET NULL" });
 
 // Users and Sessions
 db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
