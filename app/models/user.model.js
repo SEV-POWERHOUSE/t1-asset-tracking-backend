@@ -22,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       userGroupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "UserGroups",
+          model: "userGroups",
           key: "id",
         },
         allowNull: true, // Initially null if you assign groups after creation
