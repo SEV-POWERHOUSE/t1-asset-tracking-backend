@@ -43,9 +43,9 @@ exports.findAll = (req, res) => {
     where: condition,
     include: [
       {
-        model: UserGroup, // Assuming UserGroup is the name of your model
-        as: "UserGroup", // This should match the alias used in your association
-        attributes: ["name"], // You can specify the attributes you want from the UserGroup
+        model: UserGroup,
+        as: "userGroup",
+        attributes: ["name"],
       },
     ],
   })

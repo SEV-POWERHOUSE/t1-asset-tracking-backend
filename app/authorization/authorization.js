@@ -1,6 +1,6 @@
 const db = require("../models");
 const Session = db.session;
-const skipAuthorization = false;
+const skipAuthorization = true;
 
 authenticate = (req, res, next) => {
   let token = null;
