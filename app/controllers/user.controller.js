@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.user;
+const UserGroup = db.userGroup;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
@@ -17,6 +18,7 @@ exports.create = (req, res) => {
     fName: req.body.fName,
     lName: req.body.lName,
     email: req.body.email,
+    userGroupId: req.body.userGroupId,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
   };
@@ -32,18 +34,27 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all People from the database.
+// Retrieve all Users from the database, including their associated UserGroups.
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
 
-  User.findAll({ where: condition })
+  User.findAll({
+    where: condition,
+    include: [
+      {
+        model: UserGroup,
+        as: "userGroup",
+        attributes: ["name"],
+      },
+    ],
+  })
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving people.",
+        message: err.message || "Some error occurred while retrieving users.",
       });
     });
 };
@@ -117,6 +128,37 @@ exports.update = (req, res) => {
       res.status(500).send({
         message: "Error updating User with id=" + id,
       });
+    });
+};
+
+exports.updateGroup = (req, res) => {
+  const id = req.params.id;
+  const userGroupId = req.body.userGroupId;
+
+  console.log("Received data:", req.body); // Log to check the received data
+
+  console.log(`Updating user ${id} to group ${userGroupId}`);
+
+  User.update(
+    { userGroupId: userGroupId },
+    {
+      where: { id: id },
+    }
+  )
+    .then((num) => {
+      if (num == 1) {
+        res.send({ message: "User's group was updated successfully." });
+      } else {
+        res.send({
+          message: `Cannot update User's group with id=${id}. Maybe User was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.error("Error updating User's group:", err);
+      res
+        .status(500)
+        .send({ message: "Error updating User's group with id=" + id });
     });
 };
 

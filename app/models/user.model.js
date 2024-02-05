@@ -19,14 +19,14 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      // refresh_token: {
-      //   type: Sequelize.STRING(512),
-      //   allowNull: true
-      // },
-      // expiration_date: {
-      //   type: Sequelize.DATE,
-      //   allowNull: true
-      // },
+      userGroupId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "userGroups",
+          key: "id",
+        },
+        allowNull: true, // Initially null if you assign groups after creation
+      },
     },
     {
       timestamps: false,

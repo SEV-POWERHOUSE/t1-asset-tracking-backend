@@ -11,7 +11,6 @@ db.sequelize.sync();
 
 var corsOptions = {
   origin: ["http://localhost:8081", "https://asset.eaglesoftwareteam.com"],
-  // credentials: true, // You might need this if your front-end uses credentials like cookies or auth headers
 };
 
 app.use(cors(corsOptions));
@@ -25,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 require("./app/routes/auth.routes.js")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/userGroup.routes")(app);
+
 // require("./app/routes/email.routes")(app);
 
 // Simple route
