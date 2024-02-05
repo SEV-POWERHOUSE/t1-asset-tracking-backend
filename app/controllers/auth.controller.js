@@ -74,6 +74,7 @@ exports.login = async (req, res) => {
           lName: lastName,
           email: email,
           userGroupId: data ? data.userGroupId : null,
+          devPermission: false,
         };
       }
     })
@@ -198,6 +199,7 @@ exports.login = async (req, res) => {
           lName: user.lName,
           userId: user.id,
           userGroupId: user.userGroupId,
+          devPermission: user.devPermission,
           token: token,
           // refresh_token: user.refresh_token,
           // expiration_date: user.expiration_date

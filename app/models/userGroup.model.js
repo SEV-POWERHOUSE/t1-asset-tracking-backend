@@ -10,6 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true, // Ensure email is unique across all records
       },
     },
     {

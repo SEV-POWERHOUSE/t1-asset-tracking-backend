@@ -19,6 +19,7 @@ exports.create = (req, res) => {
     lName: req.body.lName,
     email: req.body.email,
     userGroupId: req.body.userGroupId,
+    devPermission: req.body.devPermission,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
   };
