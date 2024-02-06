@@ -108,7 +108,7 @@ db.serializedAsset.hasOne(db.lease, {foreignKey: "serialAssetId", onDelete: "CAS
 db.lease.belongsTo(db.serializedAsset, {foreignKey: "serialAssetId", onDelete: "CASCADE"});
 
 //Service and SerializedAsset Link
-db.serializedAsset.hasOne(db.service, {foreignKey: "serialAsserId", onDelete: "CASCADE"});
-db.service.belongsTo(db.serializedAsset, {foreignKey: "serialAsserId", onDelete: "CASCADE"});
+db.serializedAsset.hasOne(db.service, {foreignKey: "serialAssetId", onDelete: "CASCADE"});
+db.service.belongsTo(db.serializedAsset, {foreignKey: "serialAssetId", onDelete: "CASCADE"});
 
 module.exports = db;
