@@ -1,4 +1,4 @@
-import { Date } from '@sequelize/core';
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize, Sequelize) => {
     const Service = sequelize.define(
@@ -17,16 +17,16 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       startDate: {
-        type: Sequelize.Date,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       endDate: {
-        type: Sequelize.Date,
-        allowNull: True,
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       length: {
         type: Sequelize.STRING,
-        allowNull: True,
+        allowNull: true,
       },
       serialAssetId: {
         type: Sequelize.INTEGER,

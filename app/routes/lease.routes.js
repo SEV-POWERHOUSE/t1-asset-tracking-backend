@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const lease = require("../controllers/leaseController.js");
+    const lease = require("../controllers/lease.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

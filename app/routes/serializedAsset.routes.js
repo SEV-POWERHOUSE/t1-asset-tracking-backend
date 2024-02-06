@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const serialAsset = require("../controllers/serialAssetController.js");
+    const serialAsset = require("../controllers/serializedAsset.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const room = require("../controllers/roomController.js");
+    const room = require("../controllers/room.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

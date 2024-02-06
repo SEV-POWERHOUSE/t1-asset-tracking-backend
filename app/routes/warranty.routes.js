@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const warranty = require("../controllers/warrantyController.js");
+    const warranty = require("../controllers/warranty.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

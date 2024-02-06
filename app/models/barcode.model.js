@@ -6,14 +6,10 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         allowNull: false,
       },
-      barcode: {
-        type: Sequelize.String,
-        allowNull: false,
-      },
-     /* barcodeType: ???? {
+      blackAndWhiteBinaryCodeOffBackOfLabelThing: {
         type: Sequelize.STRING,
         allowNull: false,
-      },*/ 
+      },
       serialAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,

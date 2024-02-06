@@ -1,4 +1,4 @@
-import { Date } from '@sequelize/core';
+const { DataTypes } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
     const PersonAsset = sequelize.define(
       "personAsset", {
@@ -13,19 +13,19 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       checkoutDate: {
-        type: Sequelize.Date,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       checkinDate: {
-        type: Sequelize.Date,
+        type: Sequelize.DATE,
         allowNull: false
       },
       expectedCheckinDate: {
-        type: Sequelize.Date,
+        type: Sequelize.DATE,
         allowNull: true,
       },
      checkoutType: {
-        type: Sequelize.Date,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       personId: {

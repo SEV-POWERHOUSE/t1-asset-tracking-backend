@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const barcode = require("../controllers/barcodeController.js");
+    const barcode = require("../controllers/barcode.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

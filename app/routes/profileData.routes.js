@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const profileData = require("../controllers/profileDataController.js");
+    const profileData = require("../controllers/profileData.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

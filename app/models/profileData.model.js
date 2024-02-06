@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
     const ProfileData = sequelize.define(
         "profileData", {
-     profileId: {
+     profileDataId: {
          type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
@@ -15,8 +15,9 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       profileId: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        allowNull: false,
       },
     }, {
       timestamps: false,

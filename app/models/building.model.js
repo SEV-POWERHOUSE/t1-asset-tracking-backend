@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    const Room = sequelize.define(
-        "room", {
+    const Building = sequelize.define(
+        "building", {
       buildingId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -21,5 +21,5 @@ module.exports = (sequelize, Sequelize) => {
     }, {
       timestamps: false,
     });
-    return BuildingProfile;
+    return Building;
   }

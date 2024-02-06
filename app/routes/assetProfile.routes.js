@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const assetProfile = require("../controllers/assetProfileController.js");
+    const assetProfile = require("../controllers/assetprofile.Controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   

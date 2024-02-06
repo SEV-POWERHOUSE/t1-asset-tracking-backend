@@ -1,4 +1,5 @@
-import { Date } from '@sequelize/core';
+const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize, Sequelize) => {
     const Warranty = sequelize.define(
         "warranty", {
@@ -8,15 +9,15 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       warrantyType: {
-        type: Sequelize.String,
+        type: Sequelize.STRING,
         allowNull: false,
       },
      endDate: {
-        type: Sequelize.Date,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       length: {
-        type: Sequelize.String,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       serialAssetId: {
