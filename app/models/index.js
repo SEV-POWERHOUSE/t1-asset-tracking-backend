@@ -64,8 +64,8 @@ db.person.hasMany(db.personAsset, {foreignKey: "personId", onDelete: "CASCADE"})
 db.personAsset.belongsTo(db.person, {foreignKey: "personId", onDelete: "CASCADE "});
 
 //BuildingAsset and SerializedAsset Link
-db.buildingAsset.hasMany(db.serializedAsset, {foreignKey: "serialAssetId", onDelete: "CASCADE"});
-db.serializedAsset.belongsTo(db.buildingAsset, {foreignKey: "serialAssetId", onDelete: "CASCADE"})
+db.buildingAsset.hasMany(db.serializedAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"});
+db.serializedAsset.belongsTo(db.buildingAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"})
 
 //RoomAsset and SerializedAsset Link
 db.roomAsset.hasMany(db.serializedAsset, {foreignKey: "serialAssetId", onDelete: "CASCADE"});
