@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Building
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.fName) {
+  if (!req.body.name) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     buildingId: req.body.buildingId,
     name: req.body.name,
     abbreviation: req.body.abbreviation,
-    noOfRooms: req.body.noofRooms,
+    noOfRooms: req.body.noOfRooms,
   };
   // Save Building in the database
   Building.create(building)
@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Building with a buildingId
 exports.findOne = (req, res) => {
-  const buildingid = req.params.buildingId;
+  const buildingId = req.params.buildingId;
 
   Building.findByPk(buildingId)
     .then((data) => {
@@ -119,7 +119,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const buildingId = req.params.buildingId;
 
-  Student.destroy({
+  Building.destroy({
     where: { buildingId: buildingId },
   })
     .then((num) => {
@@ -129,7 +129,7 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot delete  with buildingId=${buildingid}. Maybe Building was not found!`,
+          message: `Cannot delete  with buildingId=${buildingId}. Maybe Building was not found!`,
         });
       }
     })
