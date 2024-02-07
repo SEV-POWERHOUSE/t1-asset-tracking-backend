@@ -1,5 +1,3 @@
-const { DataTypes } = require('sequelize');
-
 module.exports = (sequelize, Sequelize) => {
     const Service = sequelize.define(
         "service", {

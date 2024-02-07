@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
     const Warranty = sequelize.define(
         "warranty", {
-      warantyId: {
+      warrantyId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
