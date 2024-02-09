@@ -18,21 +18,21 @@ db.sequelize = sequelize;
 db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
-  db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
- db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
- db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
+// db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
+// db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
+// db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 // db.lease = require("./lease.model.js")(sequelize, Sequelize);
 // db.log = require("./log.model.js")(sequelize, Sequelize);
 // db.logType = require("./logType.model.js")(sequelize, Sequelize);
-// db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 // db.person = require("./person.model.js")(sequelize, Sequelize);
+// db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 // db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 // db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
-db.serializedAsset = require("./serializedAsset.model.js")(sequelize, Sequelize);
+// db.serializedAsset = require("./serializedAsset.model.js")(sequelize, Sequelize);
 // db.service = require("./service.model.js")(sequelize, Sequelize);
 // db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 
@@ -63,32 +63,32 @@ db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
 // db.personAsset.belongsTo(db.person, {foreignKey: "personId", onDelete: "CASCADE "});
 
 // //BuildingAsset and SerializedAsset Link
-// db.buildingAsset.hasMany(db.serializedAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"});
-// db.serializedAsset.belongsTo(db.buildingAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"})
+// db.buildingAsset.hasMany(db.serializedizedAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.belongsTo(db.buildingAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"})
 
 // //RoomAsset and SerializedAsset Link
-// db.roomAsset.hasMany(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-// db.serializedAsset.belongsTo(db.roomAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.roomAsset.hasMany(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.belongsTo(db.roomAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 // //SerializedAsset and Barcode Link
-// db.serializedAsset.hasMany(db.barcode, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-// db.barcode.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.hasMany(db.barcode, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.barcode.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
-//AssetCat and AssetType Link
-db.assetCat.hasMany(db.assetType, {foreignKey: "catId", onDelete: "CASCADE"});
-db.assetType.belongsTo(db.assetCat, {foreignKey: "catId", onDelete: "CASCADE"});
+// //AssetCat and AssetType Link
+// db.assetCat.hasMany(db.assetType, {foreignKey: "catId", onDelete: "CASCADE"});
+// db.assetType.belongsTo(db.assetCat, {foreignKey: "catId", onDelete: "CASCADE"});
 
-//AssetType and AssetProfile Link
-db.assetType.hasMany(db.assetProfile, {foreignKey: "typeId", onDelete: "CASCADE"});
-db.assetProfile.belongsTo(db.assetType, {foreignKey: "typeId", onDelete: "CASCADE"});
+// //AssetType and AssetProfile Link
+// db.assetType.hasMany(db.assetProfile, {foreignKey: "typeId", onDelete: "CASCADE"});
+// db.assetProfile.belongsTo(db.assetType, {foreignKey: "typeId", onDelete: "CASCADE"});
 
 // //AssetProfile and ProfileData Link
 // db.assetProfile.hasMany(db.profileData, {foreignKey: "profileId", onDelete: "CASCADE"});
 // db.profileData.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
 
-//Asset Profile and SerializedAsset Link
-db.assetProfile.hasMany(db.serializedAsset, {foreignKey: "profileId", onDelete: "CASCADE"});
-db.serializedAsset.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
+// //Asset Profile and SerializedAsset Link
+// db.assetProfile.hasMany(db.serializedizedAsset, {foreignKey: "profileId", onDelete: "CASCADE"});
+// db.serializedizedAsset.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
 
 // //Log and LogType Link
 // db.logType.hasMany(db.log, {foreignKey: "logTypeId", onDelete: "CASCADE"});
@@ -99,15 +99,15 @@ db.serializedAsset.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete
 // db.log.belongsTo(db.personAsset, {foreignKey: "personAssetId", onDelete: "CASCADE"});
 
 // //Warranty and SerializedAsset Link
-// db.serializedAsset.hasOne(db.warranty, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-// db.warranty.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.hasOne(db.warranty, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.warranty.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 // //Lease and SerializedAsset Link
-// db.serializedAsset.hasOne(db.lease, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-// db.lease.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.hasOne(db.lease, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.lease.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 // //Service and SerializedAsset Link
-// db.serializedAsset.hasOne(db.service, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-// db.service.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.serializedizedAsset.hasOne(db.service, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+// db.service.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 module.exports = db;
