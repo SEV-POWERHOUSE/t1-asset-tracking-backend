@@ -14,8 +14,9 @@ module.exports = (sequelize, Sequelize) => {
       },
     },
     {
-      tableName: 'userGroups',
+      tableName: 'userGroup',
       timestamps: false,
+      freezeTableName: true
     }
   );
   return UserGroup;

@@ -27,12 +27,12 @@ db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 db.lease = require("./lease.model.js")(sequelize, Sequelize);
 db.log = require("./log.model.js")(sequelize, Sequelize);
 db.logType = require("./logType.model.js")(sequelize, Sequelize);
-db.person = require("./person.model.js")(sequelize, Sequelize);
 db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
+db.person = require("./person.model.js")(sequelize, Sequelize);
 db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 db.room = require("./room.model.js")(sequelize, Sequelize);
 db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
-db.serializedizedAsset = require("./serializedizedAsset.model.js")(sequelize, Sequelize);
+db.serializedAsset = require("./serializedAsset.model.js")(sequelize, Sequelize);
 db.service = require("./service.model.js")(sequelize, Sequelize);
 db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 
@@ -63,16 +63,16 @@ db.person.hasMany(db.personAsset, {foreignKey: "personId", onDelete: "CASCADE"})
 db.personAsset.belongsTo(db.person, {foreignKey: "personId", onDelete: "CASCADE "});
 
 //BuildingAsset and SerializedAsset Link
-db.buildingAsset.hasMany(db.serializedizedAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"});
-db.serializedizedAsset.belongsTo(db.buildingAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"})
+db.buildingAsset.hasMany(db.serializedAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"});
+db.serializedAsset.belongsTo(db.buildingAsset, {foreignKey: "buildingAssetId", onDelete: "CASCADE"})
 
 //RoomAsset and SerializedAsset Link
-db.roomAsset.hasMany(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-db.serializedizedAsset.belongsTo(db.roomAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.roomAsset.hasMany(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.serializedAsset.belongsTo(db.roomAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 //SerializedAsset and Barcode Link
-db.serializedizedAsset.hasMany(db.barcode, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-db.barcode.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.serializedAsset.hasMany(db.barcode, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.barcode.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 //AssetCat and AssetType Link
 db.assetCat.hasMany(db.assetType, {foreignKey: "catId", onDelete: "CASCADE"});
@@ -87,8 +87,8 @@ db.assetProfile.hasMany(db.profileData, {foreignKey: "profileId", onDelete: "CAS
 db.profileData.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
 
 //Asset Profile and SerializedAsset Link
-db.assetProfile.hasMany(db.serializedizedAsset, {foreignKey: "profileId", onDelete: "CASCADE"});
-db.serializedizedAsset.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
+db.assetProfile.hasMany(db.serializedAsset, {foreignKey: "profileId", onDelete: "CASCADE"});
+db.serializedAsset.belongsTo(db.assetProfile, {foreignKey: "profileId", onDelete: "CASCADE"});
 
 //Log and LogType Link
 db.logType.hasMany(db.log, {foreignKey: "logTypeId", onDelete: "CASCADE"});
@@ -99,15 +99,15 @@ db.personAsset.hasMany(db.log, {foreignKey: "personAssetId", onDelete: "CASCADE"
 db.log.belongsTo(db.personAsset, {foreignKey: "personAssetId", onDelete: "CASCADE"});
 
 //Warranty and SerializedAsset Link
-db.serializedizedAsset.hasOne(db.warranty, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-db.warranty.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.serializedAsset.hasOne(db.warranty, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.warranty.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 //Lease and SerializedAsset Link
-db.serializedizedAsset.hasOne(db.lease, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-db.lease.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.serializedAsset.hasOne(db.lease, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.lease.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 //Service and SerializedAsset Link
-db.serializedizedAsset.hasOne(db.service, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
-db.service.belongsTo(db.serializedizedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.serializedAsset.hasOne(db.service, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
+db.service.belongsTo(db.serializedAsset, {foreignKey: "serializedAssetId", onDelete: "CASCADE"});
 
 module.exports = db;

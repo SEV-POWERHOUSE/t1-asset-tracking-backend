@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
       userGroupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "userGroups",
+          model: "userGroup",
           key: "id",
         },
         allowNull: true, // Initially null if you assign groups after creation
@@ -36,6 +36,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     {
       timestamps: false,
+      freezeTableName: true
     }
   );
   return User;

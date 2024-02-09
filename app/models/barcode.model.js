@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       barcodeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       blackAndWhiteBinaryCodeOffBackOfLabelThing: {
@@ -14,9 +15,14 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return Barcode;
   }

@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Logs
     router.delete("/", [authenticate], log.deleteAllLogs);
   
-    app.use("/asset-t1/logs", router);
+    app.use("/asset-t1/log", router);
   };
   

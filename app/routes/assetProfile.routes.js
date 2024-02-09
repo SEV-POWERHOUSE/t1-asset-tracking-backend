@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all AssetProfiles
     router.delete("/", [authenticate], assetProfile.deleteAllAssetProfiles);
   
-    app.use("/asset-t1/assetProfiles", router);
+    app.use("/asset-t1/assetProfile", router);
   };
   
