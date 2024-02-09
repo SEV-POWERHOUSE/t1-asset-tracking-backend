@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Services
     router.delete("/", [authenticate], service.deleteAllServices);
   
-    app.use("/asset-t1/services", router);
+    app.use("/asset-t1/service", router);
   };
   

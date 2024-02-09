@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     personId: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
       allowNull: false,
     },
     fName: {
@@ -24,6 +25,7 @@ module.exports = (sequelize, Sequelize) => {
     },
   }, {
     timestamps: false,
+    freezeTableName: true
   });
   return Person;
 }

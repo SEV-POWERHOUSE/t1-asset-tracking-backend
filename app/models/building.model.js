@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       buildingId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       name: {
@@ -20,6 +21,7 @@ module.exports = (sequelize, Sequelize) => {
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return Building;
   }

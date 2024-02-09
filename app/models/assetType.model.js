@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       typeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       typeName: {
@@ -12,12 +13,16 @@ module.exports = (sequelize, Sequelize) => {
       },
       catId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
+        references: {
+          model: "assetCat",
+          key: "catId",
+        },
       },
       
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return AssetType;
   }

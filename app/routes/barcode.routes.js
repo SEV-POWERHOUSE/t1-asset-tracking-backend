@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Barcodes
     router.delete("/", [authenticate], barcode.deleteAllBarcodes);
   
-    app.use("/asset-t1/barcodes", router);
+    app.use("/asset-t1/barcode", router);
   };
   

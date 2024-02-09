@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
       typeId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "assetType",
+          key: "typeId",
+        },
       },
      description: {
         type: Sequelize.STRING,
@@ -16,6 +20,7 @@ module.exports = (sequelize, Sequelize) => {
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return AssetProfile;
   }

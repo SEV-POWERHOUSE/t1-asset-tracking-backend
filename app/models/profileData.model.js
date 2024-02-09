@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
      profileDataId: {
          type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
               },
       dataName: {
@@ -16,11 +17,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       profileId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
+        references: {
+          model: "assetProfile",
+          key: "profileId",
+        },
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return ProfileData;
   }
