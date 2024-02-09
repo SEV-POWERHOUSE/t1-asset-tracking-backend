@@ -32,6 +32,7 @@ exports.login = async (req, res) => {
   let email = googleUser.email;
   let firstName = googleUser.given_name;
   let lastName = googleUser.family_name;
+  let profilePictureURL = googleUser.picture; // Extract profile picture URL
 
   // if we don't have their email or name, we need to make another request
   // this is solely for testing purposes
