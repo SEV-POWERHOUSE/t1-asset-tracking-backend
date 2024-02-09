@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       serviceId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       vendor: {
@@ -26,13 +27,18 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      serialAssetId: {
+      serializedAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return Service;
   }

@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Warranties
     router.delete("/", [authenticate], warranty.deleteAllWarranties);
   
-    app.use("/asset-t1/warranties", router);
+    app.use("/asset-t1/warranty", router);
   };
   

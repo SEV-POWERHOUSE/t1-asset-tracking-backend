@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Leases
     router.delete("/", [authenticate], lease.deleteAllLeases);
   
-    app.use("/asset-t1/leases", router);
+    app.use("/asset-t1/lease", router);
   };
   

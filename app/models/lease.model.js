@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       leaseId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       term: {
@@ -18,12 +19,19 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      serialAssetId: {
+      serializedAssetId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return Lease;
   }
+
+  

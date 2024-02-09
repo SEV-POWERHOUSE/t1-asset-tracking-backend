@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
       serializedAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       serializedNumber: {
@@ -20,6 +21,7 @@ module.exports = (sequelize, Sequelize) => {
       },
     }, {
       timestamps: false,
+      freezeTableName: true
     });
     return SerializedAsset;
   }

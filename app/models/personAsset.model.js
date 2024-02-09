@@ -1,14 +1,20 @@
 module.exports = (sequelize, Sequelize) => {
     const PersonAsset = sequelize.define(
       "personAsset", {
-            serialAssetId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-          },
+
+      serializedAssetId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: "serializedAsset",
+        key: "serializedAssetId",
+      },
+      },
 
       personAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       checkoutDate: {
@@ -30,8 +36,13 @@ module.exports = (sequelize, Sequelize) => {
       personId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "person",
+          key: "personId",
+        },
       },
     }, {
+      freezeTableName: true,
       timestamps: false,
     });
     return PersonAsset;

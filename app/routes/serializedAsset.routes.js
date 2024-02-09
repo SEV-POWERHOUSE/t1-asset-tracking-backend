@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const serializedAsset = require("../controllers/serializedizedAsset.controller.js");
+    const serializedAsset = require("../controllers/serializedAsset.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   
@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all SerializedAssets
     router.delete("/", [authenticate], serializedAsset.deleteAllSerializedAssets);
   
-    app.use("/asset-t1/serializedAssets", router);
+    app.use("/asset-t1/serializedAsset", router);
   };
   

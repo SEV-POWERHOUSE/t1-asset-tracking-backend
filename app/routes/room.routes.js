@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all Rooms
     router.delete("/", [authenticate], room.deleteAllRooms);
   
-    app.use("/asset-t1/rooms", router);
+    app.use("/asset-t1/room", router);
   };
   
