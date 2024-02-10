@@ -18,7 +18,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       personAssetId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
         references: {
           model: "personAsset",

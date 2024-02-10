@@ -30,7 +30,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       serializedAssetId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
         references: {
           model: "serializedAsset",

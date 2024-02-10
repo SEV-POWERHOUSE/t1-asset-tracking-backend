@@ -5,6 +5,7 @@ module.exports = (sequelize, Sequelize) => {
       logTypeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       typeName: {
