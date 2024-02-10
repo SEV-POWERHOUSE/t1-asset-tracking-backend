@@ -50,10 +50,13 @@ db.user.belongsTo(db.userGroup, {
 db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
 db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
 
-//AssetCat and AssetType Link
-db.assetCat.hasMany(db.assetType, { foreignKey: "catId", onDelete: "CASCADE" });
-db.assetType.belongsTo(db.assetCat, {
-  foreignKey: "catId",
+//AssetProfile and ProfileData Link
+db.assetProfile.hasMany(db.profileData, {
+  foreignKey: "profileId",
+  onDelete: "CASCADE",
+});
+db.profileData.belongsTo(db.assetProfile, {
+  foreignKey: "profileId",
   onDelete: "CASCADE",
 });
 
@@ -67,13 +70,10 @@ db.assetProfile.belongsTo(db.assetType, {
   onDelete: "CASCADE",
 });
 
-//AssetProfile and ProfileData Link
-db.assetProfile.hasMany(db.profileData, {
-  foreignKey: "profileId",
-  onDelete: "CASCADE",
-});
-db.profileData.belongsTo(db.assetProfile, {
-  foreignKey: "profileId",
+//AssetCat and AssetType Link
+db.assetCat.hasMany(db.assetType, { foreignKey: "catId", onDelete: "CASCADE" });
+db.assetType.belongsTo(db.assetCat, {
+  foreignKey: "catId",
   onDelete: "CASCADE",
 });
 
