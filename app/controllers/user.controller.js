@@ -136,7 +136,7 @@ exports.updateGroup = (req, res) => {
   const id = req.params.id;
   const userGroupId = req.body.userGroupId;
 
-  console.log("Received data:", req.body); // Log to check the received data
+  console.log(`Server: Received updateGroup request for user ${id} with group ${userGroupId}`, req.body);
 
   console.log(`Updating user ${id} to group ${userGroupId}`);
 
