@@ -1,31 +1,34 @@
 module.exports = (sequelize, Sequelize) => {
   const Person = sequelize.define(
-    "person", {
-    personId: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
+    "person",
+    {
+      personId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      fName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      idNumber: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
     },
-    fName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    lName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    idNumber: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  }, {
-    timestamps: false,
-    freezeTableName: true
-  });
+    {
+      timestamps: false,
+      freezeTableName: true,
+    }
+  );
   return Person;
-}
+};

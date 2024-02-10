@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Building = sequelize.define(
-        "building", {
+  const Building = sequelize.define(
+    "building",
+    {
       buildingId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -19,9 +20,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return Building;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Building;
+};

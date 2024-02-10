@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Barcode = sequelize.define(
-        "barcode", {
+  const Barcode = sequelize.define(
+    "barcode",
+    {
       barcodeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -20,9 +21,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return Barcode;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Barcode;
+};

@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Warranty = sequelize.define(
-        "warranty", {
+  const Warranty = sequelize.define(
+    "warranty",
+    {
       warrantyId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-     endDate: {
+      endDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -27,9 +28,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return Warranty;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Warranty;
+};
