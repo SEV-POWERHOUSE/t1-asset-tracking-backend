@@ -63,9 +63,9 @@ db.buildingAsset.belongsTo(db.building, {
   onDelete: "CASCADE",
 });
 
-//Room and Room Asset Link
-db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
-db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
+// //Room and Room Asset Link
+// db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
+// db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
 
 //Building and Rooms Link
 db.building.hasMany(db.room, { foreignKey: "buildingId", onDelete: "CASCADE" });
