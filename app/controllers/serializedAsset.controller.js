@@ -1,31 +1,34 @@
 const db = require("../models");
 const SerializedAsset = db.serializedAsset;
-const Op = db.Sequelize.Op;
 
 // Create and Save a new SerializedAsset
 exports.createSerializedAsset = (req, res) => {
-  // Validate request
-  if (!req.body.serializedAssetId || !req.body.serializedNumber) {
+  // Validate request for required fields
+  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message:
+        "Content cannot be empty! Serialized number, profile ID, and notes are required.",
     });
     return;
   }
 
-  // Create a SerializedAsset
-  const serializedAsset = {
-    serializedAssetId: req.body.serializedAssetId,
+  // Prepare data to create a SerializedAsset
+  const serializedAssetData = {
     serializedNumber: req.body.serializedNumber,
+    profileId: req.body.profileId,
+    notes: req.body.notes,
   };
 
-  // Save SerializedAsset in the database
-  SerializedAsset.create(serializedAsset)
+  // Create a SerializedAsset in the database
+  SerializedAsset.create(serializedAssetData)
     .then((data) => {
       res.status(201).json(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the SerializedAsset.",
+        message:
+          err.message ||
+          "Some error occurred while creating the SerializedAsset.",
       });
     });
 };
@@ -38,7 +41,9 @@ exports.getAllSerializedAssets = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving serialized assets.",
+        message:
+          err.message ||
+          "Some error occurred while retrieving serialized assets.",
       });
     });
 };
@@ -59,7 +64,9 @@ exports.getSerializedAssetById = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving SerializedAsset with serializedAssetId=" + serializedAssetId,
+        message:
+          "Error retrieving SerializedAsset with serializedAssetId=" +
+          serializedAssetId,
       });
     });
 };
@@ -78,13 +85,15 @@ exports.updateSerializedAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot update serialized asset with serializedAssetId=${serializedAssetId}. Maybe SerializedAsset was not found or req.body is empty!`,
+          message: `Cannot update SerializedAsset with serializedAssetId=${serializedAssetId}. Maybe SerializedAsset was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating SerializedAsset with serializedAssetId=" + serializedAssetId,
+        message:
+          "Error updating SerializedAsset with serializedAssetId=" +
+          serializedAssetId,
       });
     });
 };
@@ -103,13 +112,15 @@ exports.deleteSerializedAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot delete serialized asset with serializedAssetId=${serializedAssetId}. Maybe SerializedAsset was not found!`,
+          message: `Cannot delete SerializedAsset with serializedAssetId=${serializedAssetId}. Maybe it was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete SerializedAsset with serializedAssetId=" + serializedAssetId,
+        message:
+          "Could not delete SerializedAsset with serializedAssetId=" +
+          serializedAssetId,
       });
     });
 };
@@ -121,11 +132,17 @@ exports.deleteAllSerializedAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} SerializedAssets were deleted successfully!` });
+      res
+        .status(200)
+        .send({
+          message: `${nums} SerializedAssets were deleted successfully!`,
+        });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all serialized assets.",
+        message:
+          err.message ||
+          "Some error occurred while removing all serialized assets.",
       });
     });
 };

@@ -1,20 +1,19 @@
 const db = require("../models");
 const AssetType = db.assetType;
-const Op = db.Sequelize.Op;
 
 // Create and Save a new AssetType
 exports.createAssetType = (req, res) => {
   // Validate request
-  if (!req.body.typeId || !req.body.typeName || !req.body.catId) {
+  if (!req.body.typeName || !req.body.catId) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message:
+        "Content cannot be empty! Type name and category ID are required.",
     });
     return;
   }
 
   // Create an AssetType
   const assetType = {
-    typeId: req.body.typeId,
     typeName: req.body.typeName,
     catId: req.body.catId,
   };
@@ -26,7 +25,8 @@ exports.createAssetType = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the AssetType.",
+        message:
+          err.message || "Some error occurred while creating the AssetType.",
       });
     });
 };
@@ -39,7 +39,8 @@ exports.getAllAssetTypes = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving asset types.",
+        message:
+          err.message || "Some error occurred while retrieving asset types.",
       });
     });
 };
@@ -122,11 +123,14 @@ exports.deleteAllAssetTypes = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} AssetTypes were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} AssetTypes were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all asset types.",
+        message:
+          err.message || "Some error occurred while removing all asset types.",
       });
     });
 };
