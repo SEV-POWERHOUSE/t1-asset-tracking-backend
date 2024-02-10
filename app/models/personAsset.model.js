@@ -10,7 +10,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       serializedAssetId: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
         references: {
           model: "serializedAsset",
