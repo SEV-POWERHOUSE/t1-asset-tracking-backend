@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const LogType = sequelize.define(
-        "logType", {
+  const LogType = sequelize.define(
+    "logType",
+    {
       logTypeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,10 +11,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return LogType;
-  }
+      freezeTableName: true,
+    }
+  );
+  return LogType;
+};

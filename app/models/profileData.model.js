@@ -1,17 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-    const ProfileData = sequelize.define(
-        "profileData", {
-     profileDataId: {
-         type: Sequelize.INTEGER,
+  const ProfileData = sequelize.define(
+    "profileData",
+    {
+      profileDataId: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-              },
+      },
       dataName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-     dataDesc: {
+      dataDesc: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -23,9 +24,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "profileId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return ProfileData;
-  }
+      freezeTableName: true,
+    }
+  );
+  return ProfileData;
+};

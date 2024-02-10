@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const SerializedAsset = sequelize.define(
-        "serializedAsset", {
+  const SerializedAsset = sequelize.define(
+    "serializedAsset",
+    {
       serializedAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,17 +12,23 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-     profileId: {
+      profileId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "assetProfile",
+          key: "profileId",
+        },
       },
       notes: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return SerializedAsset;
-  }
+      freezeTableName: true,
+    }
+  );
+  return SerializedAsset;
+};

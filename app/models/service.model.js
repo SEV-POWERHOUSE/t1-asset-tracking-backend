@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Service = sequelize.define(
-        "service", {
+  const Service = sequelize.define(
+    "service",
+    {
       serviceId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -36,9 +37,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return Service;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Service;
+};

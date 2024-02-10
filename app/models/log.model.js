@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Log = sequelize.define(
-        "log", {
+  const Log = sequelize.define(
+    "log",
+    {
       logId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -24,10 +25,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "personAssetId",
         },
       },
-      
-    }, {
-      timestamps: true, 
-      freezeTableName: true
-    });
-    return Log;
-}
+    },
+    {
+      timestamps: true,
+      freezeTableName: true,
+    }
+  );
+  return Log;
+};

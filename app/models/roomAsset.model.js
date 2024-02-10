@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const RoomAsset = sequelize.define(
-        "roomAsset", {
+  const RoomAsset = sequelize.define(
+    "roomAsset",
+    {
       roomAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -23,9 +24,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return RoomAsset;
-  }
+      freezeTableName: true,
+    }
+  );
+  return RoomAsset;
+};

@@ -1,6 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Lease = sequelize.define(
-        "lease", {
+  const Lease = sequelize.define(
+    "lease",
+    {
       leaseId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-     endDate: {
+      endDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -27,11 +28,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-    }, {
+    },
+    {
       timestamps: false,
-      freezeTableName: true
-    });
-    return Lease;
-  }
-
-  
+      freezeTableName: true,
+    }
+  );
+  return Lease;
+};

@@ -1,21 +1,21 @@
 module.exports = (sequelize, Sequelize) => {
-    const PersonAsset = sequelize.define(
-      "personAsset", {
-
-      serializedAssetId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: "serializedAsset",
-        key: "serializedAssetId",
-      },
-      },
-
+  const PersonAsset = sequelize.define(
+    "personAsset",
+    {
       personAssetId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
+      },
+      serializedAssetId: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
       checkoutDate: {
         type: Sequelize.DATE,
@@ -23,13 +23,13 @@ module.exports = (sequelize, Sequelize) => {
       },
       checkinDate: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       expectedCheckinDate: {
         type: Sequelize.DATE,
         allowNull: true,
       },
-     checkoutType: {
+      checkoutType: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -41,9 +41,11 @@ module.exports = (sequelize, Sequelize) => {
           key: "personId",
         },
       },
-    }, {
+    },
+    {
       freezeTableName: true,
       timestamps: false,
-    });
-    return PersonAsset;
-  }
+    }
+  );
+  return PersonAsset;
+};
