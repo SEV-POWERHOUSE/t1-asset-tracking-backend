@@ -1,11 +1,10 @@
 const db = require("../models");
 const AssetCat = db.assetCat;
-const Op = db.Sequelize.Op;
 
 // Create and Save a new AssetCat
 exports.createAssetCat = (req, res) => {
   // Validate request
-  if (!req.body.catId || !req.body.catName) {
+  if (!req.body.catName) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -14,7 +13,6 @@ exports.createAssetCat = (req, res) => {
 
   // Create an AssetCat
   const assetCat = {
-    catId: req.body.catId,
     catName: req.body.catName,
   };
 
@@ -25,7 +23,8 @@ exports.createAssetCat = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the AssetCat.",
+        message:
+          err.message || "Some error occurred while creating the AssetCat.",
       });
     });
 };
@@ -38,7 +37,9 @@ exports.getAllAssetCats = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving asset categories.",
+        message:
+          err.message ||
+          "Some error occurred while retrieving asset categories.",
       });
     });
 };
@@ -52,7 +53,7 @@ exports.getAssetCatById = (req, res) => {
       if (data) {
         res.status(200).json(data);
       } else {
-        res.status  (404).send({
+        res.status(404).send({
           message: `Cannot find AssetCat with catId=${catId}.`,
         });
       }
@@ -121,11 +122,15 @@ exports.deleteAllAssetCats = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} AssetCats were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} AssetCats were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all asset categories.",
+        message:
+          err.message ||
+          "Some error occurred while removing all asset categories.",
       });
     });
 };

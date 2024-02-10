@@ -1,23 +1,22 @@
 const db = require("../models");
 const AssetProfile = db.assetProfile;
-const Op = db.Sequelize.Op;
 
 // Create and Save a new AssetProfile
 exports.createAssetProfile = (req, res) => {
   // Validate request
-  if (!req.body.profileId || !req.body.typeId) {
+  if (!req.body.typeId) {
+    // Removed profileId from validation
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content can not be empty! Type ID is required.",
     });
     return;
   }
 
   // Create an AssetProfile
   const assetProfile = {
-    profileId: req.body.profileId,
     typeId: req.body.typeId,
     description: req.body.description || null,
-    profileData: req.body.profileData || null,
+    // profileData is not included in the model so it should not be in the creation logic
   };
 
   // Save AssetProfile in the database
@@ -27,7 +26,8 @@ exports.createAssetProfile = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the AssetProfile.",
+        message:
+          err.message || "Some error occurred while creating the AssetProfile.",
       });
     });
 };
@@ -40,7 +40,8 @@ exports.getAllAssetProfiles = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving asset profiles.",
+        message:
+          err.message || "Some error occurred while retrieving asset profiles.",
       });
     });
 };
@@ -123,11 +124,15 @@ exports.deleteAllAssetProfiles = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} AssetProfiles were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} AssetProfiles were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all asset profiles.",
+        message:
+          err.message ||
+          "Some error occurred while removing all asset profiles.",
       });
     });
 };

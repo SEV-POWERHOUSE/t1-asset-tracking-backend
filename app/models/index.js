@@ -19,20 +19,20 @@ db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
-db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
-db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
-db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
-// db.serializedAsset = require("./serializedAsset.model.js")(sequelize, Sequelize);
+// db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
+// db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
+// db.lease = require("./lease.model.js")(sequelize, Sequelize);
+// db.log = require("./log.model.js")(sequelize, Sequelize);
+// db.logType = require("./logType.model.js")(sequelize, Sequelize);
+// db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
+// db.person = require("./person.model.js")(sequelize, Sequelize);
+// db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 // db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
-// db.lease = require("./lease.model.js")(sequelize, Sequelize);
-// db.logType = require("./logType.model.js")(sequelize, Sequelize);
-// db.log = require("./log.model.js")(sequelize, Sequelize);
-// db.person = require("./person.model.js")(sequelize, Sequelize);
-// db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
+// db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
 // db.service = require("./service.model.js")(sequelize, Sequelize);
 // db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 
@@ -46,29 +46,9 @@ db.user.belongsTo(db.userGroup, {
   onDelete: "SET NULL",
 });
 
-// User and Sessions Link
+// Users and Sessions Link
 db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
 db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
-
-//AssetProfile and ProfileData Link
-db.assetProfile.hasMany(db.profileData, {
-  foreignKey: "profileId",
-  onDelete: "CASCADE",
-});
-db.profileData.belongsTo(db.assetProfile, {
-  foreignKey: "profileId",
-  onDelete: "CASCADE",
-});
-
-//AssetType and AssetProfile Link
-db.assetType.hasMany(db.assetProfile, {
-  foreignKey: "typeId",
-  onDelete: "CASCADE",
-});
-db.assetProfile.belongsTo(db.assetType, {
-  foreignKey: "typeId",
-  onDelete: "CASCADE",
-});
 
 //AssetCat and AssetType Link
 db.assetCat.hasMany(db.assetType, { foreignKey: "catId", onDelete: "CASCADE" });
@@ -76,6 +56,26 @@ db.assetType.belongsTo(db.assetCat, {
   foreignKey: "catId",
   onDelete: "CASCADE",
 });
+
+// //AssetType and AssetProfile Link
+// db.assetType.hasMany(db.assetProfile, {
+//   foreignKey: "typeId",
+//   onDelete: "CASCADE",
+// });
+// db.assetProfile.belongsTo(db.assetType, {
+//   foreignKey: "typeId",
+//   onDelete: "CASCADE",
+// });
+
+// //AssetProfile and ProfileData Link
+// db.assetProfile.hasMany(db.profileData, {
+//   foreignKey: "profileId",
+//   onDelete: "CASCADE",
+// });
+// db.profileData.belongsTo(db.assetProfile, {
+//   foreignKey: "profileId",
+//   onDelete: "CASCADE",
+// });
 
 // //Asset Profile and SerializedAsset Link
 // db.assetProfile.hasMany(db.serializedAsset, {
