@@ -14,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       serialAssetId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
         references: {
           model: "serializedAsset",
