@@ -30,6 +30,7 @@ require("./app/routes/assetProfile.routes")(app);
 require("./app/routes/profileData.routes")(app);
 require("./app/routes/serializedAsset.routes")(app);
 require("./app/routes/lease.routes")(app);
+require("./app/routes/warranty.routes")(app);
 // require("./app/routes/barcode.routes")(app);
 // require("./app/routes/building.routes")(app);
 // require("./app/routes/buildingAsset.routes")(app);
@@ -44,7 +45,7 @@ require("./app/routes/lease.routes")(app);
 // require("./app/routes/roomAsset.routes")(app);
 
 // require("./app/routes/service.routes")(app);
-// require("./app/routes/warranty.routes")(app);
+
 
 // Simple route
 app.get("/", (_req, res) => {
