@@ -26,6 +26,7 @@ db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
 db.lease = require("./lease.model.js")(sequelize, Sequelize);
 db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 db.service = require("./service.model.js")(sequelize, Sequelize);
+db.person = require("./person.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
@@ -33,7 +34,7 @@ db.service = require("./service.model.js")(sequelize, Sequelize);
 // db.log = require("./log.model.js")(sequelize, Sequelize);
 // db.logType = require("./logType.model.js")(sequelize, Sequelize);
 // db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
-// db.person = require("./person.model.js")(sequelize, Sequelize);
+
 
 // db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
