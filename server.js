@@ -34,13 +34,14 @@ require("./app/routes/warranty.routes")(app);
 require("./app/routes/service.routes")(app);
 require("./app/routes/person.routes")(app);
 require("./app/routes/personAsset.routes")(app);
+require("./app/routes/logType.routes")(app);
+require("./app/routes/log.routes")(app);
+
 // require("./app/routes/barcode.routes")(app);
 // require("./app/routes/building.routes")(app);
 // require("./app/routes/buildingAsset.routes")(app);
 //require("./app/routes/email.routes")(app);
 
-// require("./app/routes/log.routes")(app);
-// require("./app/routes/logType.routes")(app);
 
 
 
