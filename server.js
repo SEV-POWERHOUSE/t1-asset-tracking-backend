@@ -39,14 +39,15 @@ require("./app/routes/log.routes")(app);
 require("./app/routes/barcode.routes")(app);
 require("./app/routes/building.routes")(app);
 require("./app/routes/room.routes")(app);
-// require("./app/routes/buildingAsset.routes")(app);
+require("./app/routes/buildingAsset.routes")(app);
+require("./app/routes/roomAsset.routes")(app);
 //require("./app/routes/email.routes")(app);
 
 
 
 
 
-// require("./app/routes/roomAsset.routes")(app);
+
 
 
 
