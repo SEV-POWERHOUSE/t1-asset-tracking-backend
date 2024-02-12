@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./app/routes/auth.routes.js")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/userGroup.routes")(app);
-// require("./app/routes/assetCat.routes")(app);
+ require("./app/routes/assetCat.routes")(app);
 // require("./app/routes/assetProfile.routes.js")(app);
 // require("./app/routes/assetType.routes")(app);
 // require("./app/routes/barcode.routes")(app);
