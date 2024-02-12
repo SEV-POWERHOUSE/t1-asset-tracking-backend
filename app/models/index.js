@@ -58,14 +58,14 @@ db.assetType.belongsTo(db.assetCat, {
 });
 
 // //AssetType and AssetProfile Link
-// db.assetType.hasMany(db.assetProfile, {
-//   foreignKey: "typeId",
-//   onDelete: "CASCADE",
-// });
-// db.assetProfile.belongsTo(db.assetType, {
-//   foreignKey: "typeId",
-//   onDelete: "CASCADE",
-// });
+db.assetType.hasMany(db.assetProfile, {
+  foreignKey: "typeId",
+  onDelete: "CASCADE",
+});
+db.assetProfile.belongsTo(db.assetType, {
+  foreignKey: "typeId",
+  onDelete: "CASCADE",
+});
 
 // //AssetProfile and ProfileData Link
 // db.assetProfile.hasMany(db.profileData, {
