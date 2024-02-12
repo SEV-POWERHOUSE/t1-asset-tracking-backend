@@ -21,12 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API routes 
-require("./app/routes/auth.routes.js")(app);
+require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/userGroup.routes")(app);
 require("./app/routes/assetCat.routes")(app);
 require("./app/routes/assetType.routes")(app);
-require("./app/routes/assetProfile.routes.js")(app);
+//require("./app/routes/assetProfile.routes")(app);
 
 // require("./app/routes/barcode.routes")(app);
 // require("./app/routes/building.routes")(app);
