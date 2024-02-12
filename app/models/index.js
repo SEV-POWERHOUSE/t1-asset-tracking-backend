@@ -27,13 +27,14 @@ db.lease = require("./lease.model.js")(sequelize, Sequelize);
 db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 db.service = require("./service.model.js")(sequelize, Sequelize);
 db.person = require("./person.model.js")(sequelize, Sequelize);
+db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 
 // db.log = require("./log.model.js")(sequelize, Sequelize);
 // db.logType = require("./logType.model.js")(sequelize, Sequelize);
-// db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
+
 
 
 // db.room = require("./room.model.js")(sequelize, Sequelize);
@@ -123,6 +124,27 @@ db.service.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
+//Person and PersonAsset Link
+db.person.hasMany(db.personAsset, {
+  foreignKey: "personId",
+  onDelete: "CASCADE",
+});
+db.personAsset.belongsTo(db.person, {
+  foreignKey: "personId",
+  onDelete: "CASCADE",
+});
+
+//PersonAsset and SerializedAsset Link
+db.serializedAsset.hasOne(db.personAsset, {         //should be has many?? - sg
+  foreignKey: "serializedAssetId",                  //serialized asset has personAsset? or other way?
+  onDelete: "CASCADE",
+});
+db.personAsset.belongsTo(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+
+
 
 // //SerializedAsset and Barcode Link
 // db.serializedAsset.hasMany(db.barcode, {
@@ -155,15 +177,7 @@ db.service.belongsTo(db.serializedAsset, {
 //   onDelete: "CASCADE",
 // });
 
-// //Person and PersonAsset Link
-// db.person.hasMany(db.personAsset, {
-//   foreignKey: "personId",
-//   onDelete: "CASCADE",
-// });
-// db.personAsset.belongsTo(db.person, {
-//   foreignKey: "personId",
-//   onDelete: "CASCADE",
-// });
+
 
 // //BuildingAsset and SerializedAsset Link
 // db.buildingAsset.hasMany(db.serializedAsset, {
