@@ -37,14 +37,6 @@ db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
 
 
-
-
-
-
- 
-
-
-
 // User and UserGroup
 db.userGroup.hasMany(db.user, {
   foreignKey: "userGroupId",
@@ -191,25 +183,25 @@ db.buildingAsset.belongsTo(db.building, {
 db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
 db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
 
-// //BuildingAsset and SerializedAsset Link
-// db.buildingAsset.hasMany(db.serializedAsset, {
-//   foreignKey: "buildingAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.serializedAsset.belongsTo(db.buildingAsset, {
-//   foreignKey: "buildingAssetId",
-//   onDelete: "CASCADE",
-// });
+//BuildingAsset and SerializedAsset Link
+db.buildingAsset.hasMany(db.serializedAsset, {
+  foreignKey: "buildingAssetId",
+  onDelete: "CASCADE",
+});
+db.serializedAsset.belongsTo(db.buildingAsset, {
+  foreignKey: "buildingAssetId",
+  onDelete: "CASCADE",
+});
 
-// //RoomAsset and SerializedAsset Link
-// db.roomAsset.hasMany(db.serializedAsset, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.serializedAsset.belongsTo(db.roomAsset, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
+//RoomAsset and SerializedAsset Link
+db.roomAsset.hasMany(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+db.serializedAsset.belongsTo(db.roomAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
 
 
 
