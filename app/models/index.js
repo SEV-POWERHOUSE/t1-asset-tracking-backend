@@ -31,14 +31,15 @@ db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 db.logType = require("./logType.model.js")(sequelize, Sequelize);
 db.log = require("./log.model.js")(sequelize, Sequelize);
 db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
-// db.building = require("./building.model.js")(sequelize, Sequelize);
+db.building = require("./building.model.js")(sequelize, Sequelize);
+db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 
 
 
 
 
-// db.room = require("./room.model.js")(sequelize, Sequelize);
+
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
  
 
@@ -169,6 +170,13 @@ db.barcode.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
+//Building and Rooms Link
+db.building.hasMany(db.room, { foreignKey: "buildingId", onDelete: "CASCADE" });
+db.room.belongsTo(db.building, {
+  foreignKey: "buildingId",
+  onDelete: "CASCADE",
+});
+
 // // Buildings and BuildingAsset Link
 // db.building.hasMany(db.buildingAsset, {
 //   foreignKey: "buildingId",
@@ -183,12 +191,7 @@ db.barcode.belongsTo(db.serializedAsset, {
 // db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
 // db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
 
-// //Building and Rooms Link
-// db.building.hasMany(db.room, { foreignKey: "buildingId", onDelete: "CASCADE" });
-// db.room.belongsTo(db.building, {
-//   foreignKey: "buildingId",
-//   onDelete: "CASCADE",
-// });
+
 
 
 
