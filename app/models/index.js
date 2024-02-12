@@ -30,7 +30,7 @@ db.person = require("./person.model.js")(sequelize, Sequelize);
 db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 db.logType = require("./logType.model.js")(sequelize, Sequelize);
 db.log = require("./log.model.js")(sequelize, Sequelize);
-// db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
+db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 
@@ -159,18 +159,15 @@ db.log.belongsTo(db.personAsset, {
   onDelete: "CASCADE",
 });
 
-
-
-
-// //SerializedAsset and Barcode Link
-// db.serializedAsset.hasMany(db.barcode, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.barcode.belongsTo(db.serializedAsset, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
+//SerializedAsset and Barcode Link
+db.serializedAsset.hasMany(db.barcode, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+db.barcode.belongsTo(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
 
 // // Buildings and BuildingAsset Link
 // db.building.hasMany(db.buildingAsset, {
