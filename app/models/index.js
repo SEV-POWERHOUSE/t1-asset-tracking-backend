@@ -19,7 +19,7 @@ db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
  db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
-// db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
+ db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
 // db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
@@ -50,12 +50,12 @@ db.user.belongsTo(db.userGroup, {
 db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
 db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
 
-// //AssetCat and AssetType Link
-// db.assetCat.hasMany(db.assetType, { foreignKey: "catId", onDelete: "CASCADE" });
-// db.assetType.belongsTo(db.assetCat, {
-//   foreignKey: "catId",
-//   onDelete: "CASCADE",
-// });
+//AssetCat and AssetType Link
+db.assetCat.hasMany(db.assetType, { foreignKey: "catId", onDelete: "CASCADE" });
+db.assetType.belongsTo(db.assetCat, {
+  foreignKey: "catId",
+  onDelete: "CASCADE",
+});
 
 // //AssetType and AssetProfile Link
 // db.assetType.hasMany(db.assetProfile, {
