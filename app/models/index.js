@@ -25,6 +25,7 @@ db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
 db.lease = require("./lease.model.js")(sequelize, Sequelize);
 db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
+db.service = require("./service.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
@@ -37,7 +38,7 @@ db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 // db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
  
-// db.service = require("./service.model.js")(sequelize, Sequelize);
+
 
 
 // User and UserGroup
@@ -107,6 +108,16 @@ db.serializedAsset.hasOne(db.warranty, {
   onDelete: "CASCADE",
 });
 db.warranty.belongsTo(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+
+//Service and SerializedAsset Link
+db.serializedAsset.hasOne(db.service, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+db.service.belongsTo(db.serializedAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });
@@ -190,14 +201,6 @@ db.warranty.belongsTo(db.serializedAsset, {
 
 
 
-// //Service and SerializedAsset Link
-// db.serializedAsset.hasOne(db.service, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.service.belongsTo(db.serializedAsset, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
+
 
 module.exports = db;
