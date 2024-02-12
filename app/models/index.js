@@ -67,15 +67,15 @@ db.assetProfile.belongsTo(db.assetType, {
   onDelete: "CASCADE",
 });
 
-//AssetProfile and ProfileData Link
-db.assetProfile.hasMany(db.profileData, {
-  foreignKey: "profileId",
-  onDelete: "CASCADE",
-});
-db.profileData.belongsTo(db.assetProfile, {
-  foreignKey: "profileId",
-  onDelete: "CASCADE",
-});
+// //AssetProfile and ProfileData Link
+// db.assetProfile.hasMany(db.profileData, {
+//   foreignKey: "profileId",
+//   onDelete: "CASCADE",
+// });
+// db.profileData.belongsTo(db.assetProfile, {
+//   foreignKey: "profileId",
+//   onDelete: "CASCADE",
+// });
 
 // //Asset Profile and SerializedAsset Link
 // db.assetProfile.hasMany(db.serializedAsset, {

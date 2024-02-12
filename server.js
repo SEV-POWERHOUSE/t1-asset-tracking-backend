@@ -37,7 +37,7 @@ require("./app/routes/assetProfile.routes.js")(app);
 // require("./app/routes/logType.routes")(app);
 // require("./app/routes/personAsset.routes")(app);
 // require("./app/routes/person.routes")(app);
-require("./app/routes/profileData.routes")(app);
+// require("./app/routes/profileData.routes")(app);
 // require("./app/routes/room.routes")(app);
 // require("./app/routes/roomAsset.routes")(app);
 // require("./app/routes/serializedAsset.routes")(app);
