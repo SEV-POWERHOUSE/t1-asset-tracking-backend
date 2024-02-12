@@ -20,7 +20,7 @@ db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
  db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
  db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
-db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
+//db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
@@ -57,15 +57,15 @@ db.assetType.belongsTo(db.assetCat, {
   onDelete: "CASCADE",
 });
 
-// //AssetType and AssetProfile Link
-db.assetType.hasMany(db.assetProfile, {
-  foreignKey: "typeId",
-  onDelete: "CASCADE",
-});
-db.assetProfile.belongsTo(db.assetType, {
-  foreignKey: "typeId",
-  onDelete: "CASCADE",
-});
+// // //AssetType and AssetProfile Link
+// db.assetType.hasMany(db.assetProfile, {
+//   foreignKey: "typeId",
+//   onDelete: "CASCADE",
+// });
+// db.assetProfile.belongsTo(db.assetType, {
+//   foreignKey: "typeId",
+//   onDelete: "CASCADE",
+// });
 
 // //AssetProfile and ProfileData Link
 // db.assetProfile.hasMany(db.profileData, {

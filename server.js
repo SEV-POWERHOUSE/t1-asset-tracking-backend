@@ -26,7 +26,7 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/userGroup.routes")(app);
 require("./app/routes/assetCat.routes")(app);
 require("./app/routes/assetType.routes")(app);
-require("./app/routes/assetProfile.routes")(app);
+//require("./app/routes/assetProfile.routes")(app);
 
 // require("./app/routes/barcode.routes")(app);
 // require("./app/routes/building.routes")(app);
