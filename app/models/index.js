@@ -23,10 +23,11 @@ db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
 db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
+db.lease = require("./lease.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
-// db.lease = require("./lease.model.js")(sequelize, Sequelize);
+
 // db.log = require("./log.model.js")(sequelize, Sequelize);
 // db.logType = require("./logType.model.js")(sequelize, Sequelize);
 // db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
@@ -86,6 +87,16 @@ db.assetProfile.hasMany(db.serializedAsset, {
 });
 db.serializedAsset.belongsTo(db.assetProfile, {
   foreignKey: "profileId",
+  onDelete: "CASCADE",
+});
+
+//Lease and SerializedAsset Link
+db.serializedAsset.hasOne(db.lease, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+db.lease.belongsTo(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });
 
@@ -174,15 +185,7 @@ db.serializedAsset.belongsTo(db.assetProfile, {
 //   onDelete: "CASCADE",
 // });
 
-// //Lease and SerializedAsset Link
-// db.serializedAsset.hasOne(db.lease, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.lease.belongsTo(db.serializedAsset, {
-//   foreignKey: "serializedAssetId",
-//   onDelete: "CASCADE",
-// });
+
 
 // //Service and SerializedAsset Link
 // db.serializedAsset.hasOne(db.service, {
