@@ -18,9 +18,10 @@ db.sequelize = sequelize;
 db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
- db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
- db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
+db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
+db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
 db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
+db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
@@ -29,7 +30,7 @@ db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 // db.logType = require("./logType.model.js")(sequelize, Sequelize);
 // db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
 // db.person = require("./person.model.js")(sequelize, Sequelize);
-// db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
+
 // db.room = require("./room.model.js")(sequelize, Sequelize);
 // db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
  // db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
@@ -67,15 +68,15 @@ db.assetProfile.belongsTo(db.assetType, {
   onDelete: "CASCADE",
 });
 
-// //AssetProfile and ProfileData Link
-// db.assetProfile.hasMany(db.profileData, {
-//   foreignKey: "profileId",
-//   onDelete: "CASCADE",
-// });
-// db.profileData.belongsTo(db.assetProfile, {
-//   foreignKey: "profileId",
-//   onDelete: "CASCADE",
-// });
+//AssetProfile and ProfileData Link
+db.assetProfile.hasMany(db.profileData, {
+  foreignKey: "profileId",
+  onDelete: "CASCADE",
+});
+db.profileData.belongsTo(db.assetProfile, {
+  foreignKey: "profileId",
+  onDelete: "CASCADE",
+});
 
 // //Asset Profile and SerializedAsset Link
 // db.assetProfile.hasMany(db.serializedAsset, {
