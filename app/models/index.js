@@ -28,12 +28,13 @@ db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 db.service = require("./service.model.js")(sequelize, Sequelize);
 db.person = require("./person.model.js")(sequelize, Sequelize);
 db.personAsset = require("./personAsset.model.js")(sequelize, Sequelize);
+db.logType = require("./logType.model.js")(sequelize, Sequelize);
+db.log = require("./log.model.js")(sequelize, Sequelize);
 // db.barcode = require("./barcode.model.js")(sequelize, Sequelize);
 // db.building = require("./building.model.js")(sequelize, Sequelize);
 // db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 
-// db.log = require("./log.model.js")(sequelize, Sequelize);
-// db.logType = require("./logType.model.js")(sequelize, Sequelize);
+
 
 
 
@@ -144,6 +145,21 @@ db.personAsset.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
+//Log and LogType Link
+db.logType.hasMany(db.log, { foreignKey: "logTypeId", onDelete: "CASCADE" });
+db.log.belongsTo(db.logType, { foreignKey: "logTypeId", onDelete: "CASCADE" });
+
+//PersonAsset and Log Link
+db.personAsset.hasMany(db.log, {
+  foreignKey: "personAssetId",
+  onDelete: "CASCADE",
+});
+db.log.belongsTo(db.personAsset, {
+  foreignKey: "personAssetId",
+  onDelete: "CASCADE",
+});
+
+
 
 
 // //SerializedAsset and Barcode Link
@@ -199,19 +215,7 @@ db.personAsset.belongsTo(db.serializedAsset, {
 //   onDelete: "CASCADE",
 // });
 
-// //Log and LogType Link
-// db.logType.hasMany(db.log, { foreignKey: "logTypeId", onDelete: "CASCADE" });
-// db.log.belongsTo(db.logType, { foreignKey: "logTypeId", onDelete: "CASCADE" });
 
-// //PersonAsset and Log Link
-// db.personAsset.hasMany(db.log, {
-//   foreignKey: "personAssetId",
-//   onDelete: "CASCADE",
-// });
-// db.log.belongsTo(db.personAsset, {
-//   foreignKey: "personAssetId",
-//   onDelete: "CASCADE",
-// });
 
 
 
