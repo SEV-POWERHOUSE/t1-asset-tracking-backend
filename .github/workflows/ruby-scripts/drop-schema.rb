@@ -2,7 +2,7 @@ require 'dotenv/load'
 require 'mysql2'
 
 # Function to insert data into the MySQL database
-def insert_data_to_mysql
+def drop_schema
   begin
     # Connect to MySQL
     client = Mysql2::Client.new(
@@ -28,4 +28,4 @@ def insert_data_to_mysql
 end
 
 # Call the function to insert data
-insert_data_to_mysql
+drop_schema
