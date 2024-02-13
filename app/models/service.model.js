@@ -1,11 +1,11 @@
-const { DataTypes } = require('sequelize');
-
 module.exports = (sequelize, Sequelize) => {
-    const Service = sequelize.define(
-        "service", {
+  const Service = sequelize.define(
+    "service",
+    {
       serviceId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       vendor: {
@@ -28,13 +28,19 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      serialAssetId: {
+      serializedAssetId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
-    }, {
+    },
+    {
       timestamps: false,
-    });
-    return Service;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Service;
+};

@@ -1,26 +1,26 @@
 module.exports = (app) => {
-    const serialAsset = require("../controllers/serializedAsset.controller.js");
+    const serializedAsset = require("../controllers/serializedAsset.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   
-    // Create a new SerialAsset
-    router.post("/", [authenticate], serialAsset.createSerialAsset);
+    // Create a new SerializedAsset
+    router.post("/", [authenticate], serializedAsset.createSerializedAsset);
   
-    // Retrieve all SerialAssets
-    router.get("/", [authenticate], serialAsset.getAllSerialAssets);
+    // Retrieve all SerializedAssets
+    router.get("/", [authenticate], serializedAsset.getAllSerializedAssets);
   
-    // Retrieve a single SerialAsset by serialAssetId
-    router.get("/:serialAssetId", [authenticate], serialAsset.getSerialAssetById);
+    // Retrieve a single SerializedAsset by serializedAssetId
+    router.get("/:serializedAssetId", [authenticate], serializedAsset.getSerializedAssetById);
   
-    // Update a SerialAsset by serialAssetId
-    router.put("/:serialAssetId", [authenticate], serialAsset.updateSerialAsset);
+    // Update a SerializedAsset by serializedAssetId
+    router.put("/:serializedAssetId", [authenticate], serializedAsset.updateSerializedAsset);
   
-    // Delete a SerialAsset by serialAssetId
-    router.delete("/:serialAssetId", [authenticate], serialAsset.deleteSerialAsset);
+    // Delete a SerializedAsset by serializedAssetId
+    router.delete("/:serializedAssetId", [authenticate], serializedAsset.deleteSerializedAsset);
   
-    // Delete all SerialAssets
-    router.delete("/", [authenticate], serialAsset.deleteAllSerialAssets);
+    // Delete all SerializedAssets
+    router.delete("/", [authenticate], serializedAsset.deleteAllSerializedAssets);
   
-    app.use("/asset-t1/serial-assets", router);
+    app.use("/asset-t1/serializedAsset", router);
   };
   

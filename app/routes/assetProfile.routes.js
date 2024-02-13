@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const assetProfile = require("../controllers/assetprofile.Controller.js");
+    const assetProfile = require("../controllers/assetProfile.controller.js");
     const { authenticate } = require("../authorization/authorization.js");
     const router = require("express").Router();
   
@@ -21,6 +21,6 @@ module.exports = (app) => {
     // Delete all AssetProfiles
     router.delete("/", [authenticate], assetProfile.deleteAllAssetProfiles);
   
-    app.use("/asset-t1/assetprofiles", router);
+    app.use("/asset-t1/assetProfile", router);
   };
   

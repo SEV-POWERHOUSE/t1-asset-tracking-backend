@@ -1,9 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const Building = sequelize.define(
-        "building", {
+  const Building = sequelize.define(
+    "building",
+    {
       buildingId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       name: {
@@ -18,8 +20,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-    }, {
+    },
+    {
       timestamps: false,
-    });
-    return Building;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Building;
+};

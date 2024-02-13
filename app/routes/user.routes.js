@@ -24,5 +24,5 @@ module.exports = (app) => {
   // Delete all User
   router.delete("/", [authenticate], user.deleteAll);
 
-  app.use("/asset-t1/users", router);
+  app.use("/asset-t1/user", router);
 };

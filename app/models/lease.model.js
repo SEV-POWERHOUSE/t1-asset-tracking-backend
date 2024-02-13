@@ -1,17 +1,18 @@
-const { DataTypes } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
-    const Lease = sequelize.define(
-        "lease", {
+  const Lease = sequelize.define(
+    "lease",
+    {
       leaseId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       term: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-     endDate: {
+      endDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -19,12 +20,19 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      serialAssetId: {
+      serializedAssetId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
       },
-    }, {
+    },
+    {
       timestamps: false,
-    });
-    return Lease;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Lease;
+};

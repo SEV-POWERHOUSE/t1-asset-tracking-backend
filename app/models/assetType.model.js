@@ -1,9 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const AssetType = sequelize.define(
-        "assetType", {
+  const AssetType = sequelize.define(
+    "assetType",
+    {
       typeId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       typeName: {
@@ -12,12 +14,17 @@ module.exports = (sequelize, Sequelize) => {
       },
       catId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false,
+        references: {
+          model: "assetCat",
+          key: "catId",
+        },
       },
-      
-    }, {
+    },
+    {
       timestamps: false,
-    });
-    return AssetType;
-  }
+      freezeTableName: true,
+    }
+  );
+  return AssetType;
+};

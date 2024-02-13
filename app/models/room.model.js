@@ -1,9 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const Room = sequelize.define(
-        "room", {
+  const Room = sequelize.define(
+    "room",
+    {
       roomId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
       },
       roomNo: {
@@ -13,9 +15,16 @@ module.exports = (sequelize, Sequelize) => {
       buildingId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "building",
+          key: "buildingId",
+        },
       },
-    }, {
+    },
+    {
       timestamps: false,
-    });
-    return Room;
-  }
+      freezeTableName: true,
+    }
+  );
+  return Room;
+};

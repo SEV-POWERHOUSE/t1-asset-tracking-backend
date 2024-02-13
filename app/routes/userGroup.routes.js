@@ -18,5 +18,5 @@ module.exports = (app) => {
   // Delete a UserGroup with id
   router.delete("/:id", userGroup.delete);
 
-  app.use("/asset-t1/userGroups", router);
+  app.use("/asset-t1/userGroup", router);
 };
