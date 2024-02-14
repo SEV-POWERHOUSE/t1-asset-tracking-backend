@@ -1,5 +1,7 @@
-require 'dotenv/load'
+require 'dotenv'
 require 'mysql2'
+
+Dotenv.load(File.expand_path('../../../../.env', __FILE__))
 
 # Function to insert data into the MySQL database
 def insert_data_to_mysql
@@ -9,7 +11,8 @@ def insert_data_to_mysql
       :host => ENV['DB_HOST'],
       :username => ENV['DB_USER'],
       :password => ENV['DB_PW'],
-      :database => ENV['DB_NAME']
+      :database => ENV['DB_NAME'],
+      :socket => ENV['DB_SOCKET']
     )
 
     # userGroup insert query

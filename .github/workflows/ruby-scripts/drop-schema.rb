@@ -1,5 +1,7 @@
-require 'dotenv/load'
+require 'dotenv'
 require 'mysql2'
+
+Dotenv.load(File.expand_path('../../../../.env', __FILE__))
 
 # Function to insert data into the MySQL database
 def drop_schema
@@ -9,16 +11,17 @@ def drop_schema
       :host => ENV['DB_HOST'],
       :username => ENV['DB_USER'],
       :password => ENV['DB_PW'],
-      :database => ENV['DB_NAME']
+      :database => ENV['DB_NAME'],
+      :socket => ENV['DB_SOCKET']
     )
 
     # drop schema if exists
     client.query("DROP DATABASE IF EXISTS `asset-t1`")
+    puts "Database dropped"
 
     # recreate schema
     client.query("CREATE DATABASE `asset-t1`")
-
-    puts "Data inserted successfully."
+    puts "Database created successfully."
 
   rescue Mysql2::Error => e
     puts "Error occurred: #{e.message}"
