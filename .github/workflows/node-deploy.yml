@@ -1,6 +1,6 @@
 name: Deploy dev to AWS
 
-# turn off deploy to AWS
+# Trigger conditions
 on:
   pull_request:
     types: [closed]
@@ -15,9 +15,9 @@ jobs:
       DB_PW: ${{ secrets.AWS_DB_PW}}
       DB_USER: ${{ secrets.AWS_DB_USER }}
       DB_NAME: ${{ secrets.AWS_DB_NAME }}
-      CLIENT_ID: ${{secrets.CLIENT_ID}}
-      CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
-      GOOGLE_APP_PASS: ${{secrets.GOOGLE_APP_PASS}}
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      GOOGLE_APP_PASS: ${{ secrets.GOOGLE_APP_PASS }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -30,6 +30,11 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
+      
+      - name: Install Ruby dependencies
+        run: |
+          cd .github/workflows/ruby-scripts/
+          bundle install
 
       - run: npm install
 
@@ -47,7 +52,9 @@ jobs:
       - run: npm run bundle
 
       - name: Drop and Recreate Database
-        run: ruby ${GITHUB_WORKSPACE}/.github/workflows/ruby-scripts/drop-schema.rb
+        run: |
+          cd ${GITHUB_WORKSPACE}/.github/workflows/ruby-scripts/
+          bundle exec ruby drop-schema.rb
         env:
           DB_HOST: ${{ secrets.AWS_DB_HOST }}
           DB_USER: ${{ secrets.AWS_DB_USER }}
@@ -73,12 +80,13 @@ jobs:
             cd nodeapps/asset/t1
             npm install
             sudo systemctl stop asset-t1-backend
-            # Here you might need to adjust the command to copy your service file if necessary
             sudo systemctl daemon-reload
             sudo systemctl start asset-t1-backend
 
       - name: Insert Initial Data
-        run: ruby ${GITHUB_WORKSPACE}/.github/workflows/ruby-scripts/insert.rb
+        run: |
+          cd ${GITHUB_WORKSPACE}/.github/workflows/ruby-scripts/
+          bundle exec ruby insert.rb
         env:
           DB_HOST: ${{ secrets.AWS_DB_HOST }}
           DB_USER: ${{ secrets.AWS_DB_USER }}
