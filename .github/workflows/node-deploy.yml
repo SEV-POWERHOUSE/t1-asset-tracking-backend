@@ -47,7 +47,9 @@ jobs:
       - run: npm run bundle
 
       - name: Drop and Recreate Database
-        run: ruby ruby-scripts/drop-schema.rb
+        run: |
+          cd $GITHUB_WORKSPACE
+          ruby .github/ruby-scripts/drop-schema.rb
         env:
           DB_HOST: ${{ secrets.AWS_DB_HOST }}
           DB_USER: ${{ secrets.AWS_DB_USER }}
@@ -78,7 +80,9 @@ jobs:
             sudo systemctl start asset-t1-backend
 
       - name: Insert Initial Data
-        run: ruby ruby-scripts/insert.rb
+        run: |
+          cd $GITHUB_WORKSPACE
+          ruby .github/ruby-scripts/insert.rb
         env:
           DB_HOST: ${{ secrets.AWS_DB_HOST }}
           DB_USER: ${{ secrets.AWS_DB_USER }}
