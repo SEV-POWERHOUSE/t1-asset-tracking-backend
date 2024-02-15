@@ -2,9 +2,10 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const db = require("./app/models");
+const { initializeUserGroup } = require("./app/scripts/userGroupInit")
+const { initializeUser } = require("./app/scripts/userInit")
 
 db.sequelize.sync();
 
@@ -43,13 +44,15 @@ require("./app/routes/buildingAsset.routes")(app);
 require("./app/routes/roomAsset.routes")(app);
 //require("./app/routes/email.routes")(app);
 
+try {
+  initializeUser()
+  initializeUserGroup()
 
-
-
-
-
-
-
+  console.log("User and userGroup initialized")
+} catch (error) {
+  console.log("Initialization error: ", error)
+  process.exit(1)
+}
 
 
 // Simple route
