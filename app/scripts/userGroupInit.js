@@ -4,16 +4,16 @@ const userGroup = db.userGroup;
 
 async function initializeUserGroup() {
     try {
-        await userGroup.sync()
 
         await Promise.all([
-            userGroup.upsert({ name: 'admin' }),
-            userGroup.upsert({ name: 'MaintenanceManager' }),
-            userGroup.upsert({ name: 'MaintenanceWorker' }),
-            userGroup.upsert({ name: 'ITManager' }),
-            userGroup.upsert({ name: 'ITWorker' }),
-            userGroup.upsert({ name: 'SupportCentralManager' }),
-            userGroup.upsert({ name: 'SupportCentralWorker' }),
+            await userGroup.upsert({ name: 'Admin' }),
+            await userGroup.upsert({ name: 'Unassigned' }),
+            await userGroup.upsert({ name: 'MaintenanceManager' }),
+            await userGroup.upsert({ name: 'MaintenanceWorker' }),
+            await userGroup.upsert({ name: 'ITManager' }),
+            await userGroup.upsert({ name: 'ITWorker' }),
+            await userGroup.upsert({ name: 'SupportCentralManager' }),
+            await userGroup.upsert({ name: 'SupportCentralWorker' }),
         ])
 
         console.log("User Group initialized successfully")

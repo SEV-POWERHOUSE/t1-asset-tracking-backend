@@ -3,7 +3,6 @@ const user = db.user;
 
 async function initializeUser() {
     try {
-        await user.sync()
 
         await Promise.all([
             user.upsert({ fName: 'Jaxen', lName: 'McRay', email: 'jaxen.mcray@eagles.oc.edu', userGroupId: 1, devPermission: 1 }),

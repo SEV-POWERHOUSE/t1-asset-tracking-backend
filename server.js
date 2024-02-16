@@ -21,6 +21,20 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+
+db.sequelize.sync()
+  .then(() => {
+    console.log('Database synchronized successfully.');
+
+    // Call initialization methods after synchronization
+    initializeUserGroup();
+    initializeUser();
+  })
+  .catch(error => {
+    console.error('Error synchronizing database:', error);
+    process.exit(1);
+  });
+
 // API routes 
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
@@ -44,15 +58,18 @@ require("./app/routes/buildingAsset.routes")(app);
 require("./app/routes/roomAsset.routes")(app);
 //require("./app/routes/email.routes")(app);
 
-try {
-  initializeUser()
-  initializeUserGroup()
+// try {
+//   initializeUserGroup()
+//   console.log("userGroup initialized")
 
-  console.log("User and userGroup initialized")
-} catch (error) {
-  console.log("Initialization error: ", error)
-  process.exit(1)
-}
+//   initializeUser()
+//   console.log("user initialized")
+
+//   console.log("User and userGroup initialized")
+// } catch (error) {
+//   console.log("Initialization error: ", error)
+//   process.exit(1)
+// }
 
 
 // Simple route
