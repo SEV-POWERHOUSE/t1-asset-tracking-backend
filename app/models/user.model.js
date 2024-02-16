@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
           key: "id",
         },
         allowNull: false, // Changed to false because we are now providing a default value
-        defaultValue: 1, // Default userGroup id set to 1
+        defaultValue: 2, // Default userGroup id set to 2 (unassigned)
       },
       devPermission: {
         type: Sequelize.BOOLEAN,
