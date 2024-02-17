@@ -22,7 +22,10 @@ db.assetCat = require("./assetCat.model.js")(sequelize, Sequelize);
 db.assetType = require("./assetType.model.js")(sequelize, Sequelize);
 db.assetProfile = require("./assetProfile.model.js")(sequelize, Sequelize);
 db.profileData = require("./profileData.model.js")(sequelize, Sequelize);
-db.serializedAsset = require("./serializedAsset.model.js")(sequelize,Sequelize);
+db.serializedAsset = require("./serializedAsset.model.js")(
+  sequelize,
+  Sequelize
+);
 db.lease = require("./lease.model.js")(sequelize, Sequelize);
 db.warranty = require("./warranty.model.js")(sequelize, Sequelize);
 db.service = require("./service.model.js")(sequelize, Sequelize);
@@ -35,7 +38,6 @@ db.building = require("./building.model.js")(sequelize, Sequelize);
 db.room = require("./room.model.js")(sequelize, Sequelize);
 db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
-
 
 // User and UserGroup
 db.userGroup.hasMany(db.user, {
@@ -129,8 +131,9 @@ db.personAsset.belongsTo(db.person, {
 });
 
 //PersonAsset and SerializedAsset Link
-db.serializedAsset.hasOne(db.personAsset, {         //should be has many?? - sg
-  foreignKey: "serializedAssetId",                  //serialized asset has personAsset? or other way?
+db.serializedAsset.hasOne(db.personAsset, {
+  //should be has many?? - sg
+  foreignKey: "serializedAssetId", //serialized asset has personAsset? or other way?
   onDelete: "CASCADE",
 });
 db.personAsset.belongsTo(db.serializedAsset, {
@@ -202,12 +205,5 @@ db.serializedAsset.belongsTo(db.roomAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });
-
-
-
-
-
-
-
 
 module.exports = db;
