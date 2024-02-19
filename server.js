@@ -6,8 +6,24 @@ const app = express();
 const db = require("./app/models");
 const { initializeUserGroup } = require("./app/scripts/userGroupInit")
 const { initializeUser } = require("./app/scripts/userInit")
+const { dropSchema } = require("./app/scripts/dropSchema")
 
-db.sequelize.sync();
+
+
+// Utility drop statement. #remove after testing#
+// try {
+//   // drop schema before insert
+//   dropSchema()
+
+//   console.log("schema dropped and recreate")
+
+// } catch (error) {
+//   console.log("Error:", error)
+// }
+
+// We may not need this first sync since we also run sync right
+// before the initialization function calls
+// db.sequelize.sync();
 
 var corsOptions = {
   origin: ["http://localhost:8081", "https://asset.eaglesoftwareteam.com"],
@@ -20,6 +36,7 @@ app.options("*", cors(corsOptions)); // Enable pre-flight for all routes
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
 
 
 db.sequelize.sync()
@@ -58,18 +75,6 @@ require("./app/routes/buildingAsset.routes")(app);
 require("./app/routes/roomAsset.routes")(app);
 //require("./app/routes/email.routes")(app);
 
-// try {
-//   initializeUserGroup()
-//   console.log("userGroup initialized")
-
-//   initializeUser()
-//   console.log("user initialized")
-
-//   console.log("User and userGroup initialized")
-// } catch (error) {
-//   console.log("Initialization error: ", error)
-//   process.exit(1)
-// }
 
 
 // Simple route
