@@ -12,13 +12,17 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      catId: {
+      categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "assetCat",
-          key: "catId",
+          model: "assetCategory",
+          key: "categoryId",
         },
+      },
+      desc: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     },
     {

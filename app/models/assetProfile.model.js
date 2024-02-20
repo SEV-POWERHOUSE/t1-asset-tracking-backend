@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
           key: "typeId",
         },
       },
-      description: {
+      desc: {
         type: Sequelize.STRING,
         allowNull: true,
       },
