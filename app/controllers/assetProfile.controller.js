@@ -15,7 +15,7 @@ exports.createAssetProfile = (req, res) => {
   // Create an AssetProfile
   const assetProfile = {
     typeId: req.body.typeId,
-    description: req.body.description || null,
+    desc: req.body.desc || null,
     // profileData is not included in the model so it should not be in the creation logic
   };
 

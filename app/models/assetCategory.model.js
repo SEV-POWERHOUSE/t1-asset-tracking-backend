@@ -1,14 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-  const AssetCat = sequelize.define(
-    "assetCat",
+  const AssetCategory = sequelize.define(
+    "assetCategory",
     {
-      catId: {
+      categoryId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      catName: {
+      categoryName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      desc: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -18,5 +22,5 @@ module.exports = (sequelize, Sequelize) => {
       freezeTableName: true,
     }
   );
-  return AssetCat;
+  return AssetCategory;
 };
