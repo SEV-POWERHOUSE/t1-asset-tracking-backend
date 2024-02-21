@@ -56,7 +56,7 @@ db.sequelize.sync()
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/userGroup.routes")(app);
-require("./app/routes/assetCat.routes")(app);
+require("./app/routes/assetCategory.routes")(app);
 require("./app/routes/assetType.routes")(app);
 require("./app/routes/assetProfile.routes")(app);
 require("./app/routes/profileData.routes")(app);
