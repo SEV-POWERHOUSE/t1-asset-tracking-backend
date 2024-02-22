@@ -6,6 +6,9 @@ const app = express();
 const db = require("./app/models");
 const { initializeUserGroup } = require("./app/scripts/userGroupInit")
 const { initializeUser } = require("./app/scripts/userInit")
+const { initializeAssetCategory} = require("./app/scripts/assetCategoryInit")
+const { initializeAssetType} = require("./app/scripts/assetTypeInit")
+const { initializeAssetProfile} = require("./app/scripts/assetProfileInit")
 const { dropSchema } = require("./app/scripts/dropSchema")
 
 
@@ -40,12 +43,17 @@ app.use(express.urlencoded({ extended: true }));
 
 
 db.sequelize.sync()
-  .then(() => {
+  .then(async () => {
     console.log('Database synchronized successfully.');
 
-    // Call initialization methods after synchronization
-    initializeUserGroup();
-    initializeUser();
+    // Await the completion of each initialization method before proceeding to the next
+    await initializeUserGroup();
+    await initializeUser();
+    await initializeAssetCategory();
+    await initializeAssetType();
+    await initializeAssetProfile();
+
+    console.log('All initializations completed successfully.');
   })
   .catch(error => {
     console.error('Error synchronizing database:', error);
