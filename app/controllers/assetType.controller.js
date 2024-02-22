@@ -36,27 +36,38 @@ exports.createAssetType = (req, res) => {
 // Retrieve all AssetTypes from the database including their associated AssetCategory.
 exports.getAllAssetTypes = (req, res) => {
   AssetType.findAll({
-    include: [{
-      model: AssetCategory, // Include the AssetCategory model in the query
-      as: 'assetCategory', // This alias must match the one defined in your association
-      attributes: ['categoryId', 'categoryName', 'desc'], // Specify the attributes you want to include
-    }]
+    include: [
+      {
+        model: AssetCategory, // Include the AssetCategory model in the query
+        as: "assetCategory", // This alias must match the one defined in your association
+        attributes: ["categoryId", "categoryName", "desc"], // Specify the attributes you want to include
+      },
+    ],
   })
-  .then((data) => {
-    res.status(200).json(data);
-  })
-  .catch((err) => {
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving asset types.",
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving asset types.",
+      });
     });
-  });
 };
 
 // Find a single AssetType with a typeId
 exports.getAssetTypeById = (req, res) => {
   const typeId = req.params.typeId;
 
-  AssetType.findByPk(typeId)
+  AssetType.findByPk(typeId, {
+    include: [
+      {
+        model: AssetCategory,
+        as: "assetCategory", // Ensure this alias matches the one defined in your associations
+        attributes: ["categoryId", "categoryName", "desc"], // Adjust attributes as needed
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);

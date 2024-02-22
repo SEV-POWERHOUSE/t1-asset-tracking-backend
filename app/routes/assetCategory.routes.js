@@ -6,7 +6,7 @@ module.exports = (app) => {
   // Create a new AssetCategory
   router.post("/", [authenticate], assetCategory.createAssetCategory);
 
-  // Retrieve all AssetCats
+  // Retrieve all AssetCategories
   router.get("/", [authenticate], assetCategory.getAllAssetCategories);
 
   // New route for retrieving an AssetCategory by name
@@ -21,7 +21,7 @@ module.exports = (app) => {
   // Delete an AssetCategory with categoryId
   router.delete("/:categoryId", [authenticate], assetCategory.deleteAssetCategory);
 
-  // Delete all AssetCats
+  // Delete all AssetCategories
   router.delete("/", [authenticate], assetCategory.deleteAllAssetCategories);
 
   app.use("/asset-t1/assetCategory", router);
