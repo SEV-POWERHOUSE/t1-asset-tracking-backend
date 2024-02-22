@@ -1,28 +1,28 @@
 const db = require("../models");
-const userGroup = db.userGroup;
+const userRole = db.userRole;
 
 
-async function initializeUserGroup() {
+async function initializeUserRole() {
     try {
 
         await Promise.all([
-            await userGroup.upsert({ name: 'Admin' }),
-            await userGroup.upsert({ name: 'Unassigned' }),
-            await userGroup.upsert({ name: 'MaintenanceManager' }),
-            await userGroup.upsert({ name: 'MaintenanceWorker' }),
-            await userGroup.upsert({ name: 'ITManager' }),
-            await userGroup.upsert({ name: 'ITWorker' }),
-            await userGroup.upsert({ name: 'SupportCentralManager' }),
-            await userGroup.upsert({ name: 'SupportCentralWorker' }),
+            await userRole.upsert({ name: 'Admin' }),
+            await userRole.upsert({ name: 'Unassigned' }),
+            await userRole.upsert({ name: 'Maintenance Manager' }),
+            await userRole.upsert({ name: 'Maintenance Worker' }),
+            await userRole.upsert({ name: 'IT Manager' }),
+            await userRole.upsert({ name: 'IT Worker' }),
+            await userRole.upsert({ name: 'Support Central Manager' }),
+            await userRole.upsert({ name: 'Support Central Worker' }),
         ])
 
-        console.log("User Group initialized successfully")
+        console.log("User Role initialized successfully")
     }
     catch (error) {
         console.log("Initialization failed:", error)
     }
 }
 
-module.exports = { initializeUserGroup }
+module.exports = { initializeUserRole }
 
 // Love, Zane
