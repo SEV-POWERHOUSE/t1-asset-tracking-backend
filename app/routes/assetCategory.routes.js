@@ -24,7 +24,7 @@ module.exports = (app) => {
   // Delete an AssetCategory with categoryId
   router.delete("/:categoryId", [authenticate], assetCategory.deleteAssetCategory);
 
-  // Delete all AssetCats
+  // Delete all AssetCategories
   router.delete("/", [authenticate], assetCategory.deleteAllAssetCategories);
 
   app.use("/asset-t1/assetCategory", router);

@@ -11,10 +11,11 @@ module.exports = (sequelize, Sequelize) => {
       categoryName: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       desc: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
     },
     {

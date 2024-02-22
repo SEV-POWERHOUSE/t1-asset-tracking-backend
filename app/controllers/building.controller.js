@@ -25,7 +25,8 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Student.",
+        message:
+          err.message || "Some error occurred while creating the Student.",
       });
     });
 };
@@ -33,7 +34,9 @@ exports.create = (req, res) => {
 // Retrieve all Buildings from the database.
 exports.findAll = (req, res) => {
   const buildingId = req.query.buildingId;
-  var condition = buildingId ? { buildingId: { [Op.like]: `%${buildingId}%` } } : null;
+  var condition = buildingId
+    ? { buildingId: { [Op.like]: `%${buildingId}%` } }
+    : null;
 
   Building.findAll({ where: condition })
     .then((data) => {

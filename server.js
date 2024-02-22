@@ -5,8 +5,13 @@ const cors = require("cors");
 const app = express();
 const fileUpload = require('express-fileupload');
 const db = require("./app/models");
-const { initializeUserGroup } = require("./app/scripts/userGroupInit")
+const { initializeUserRole } = require("./app/scripts/userRoleInit")
 const { initializeUser } = require("./app/scripts/userInit")
+const { initializeAssetCategory} = require("./app/scripts/assetCategoryInit")
+const { initializeAssetType} = require("./app/scripts/assetTypeInit")
+const { initializeAssetProfile} = require("./app/scripts/assetProfileInit")
+const { initializeBuildings } = require("./app/scripts/buildingInit");
+const { initializeRooms } = require("./app/scripts/roomInit");
 const { dropSchema } = require("./app/scripts/dropSchema")
 
 
@@ -21,10 +26,6 @@ const { dropSchema } = require("./app/scripts/dropSchema")
 // } catch (error) {
 //   console.log("Error:", error)
 // }
-
-// We may not need this first sync since we also run sync right
-// before the initialization function calls
-// db.sequelize.sync();
 
 var corsOptions = {
   origin: ["http://localhost:8081", "https://asset.eaglesoftwareteam.com"],
@@ -41,12 +42,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 db.sequelize.sync()
-  .then(() => {
+  .then(async () => {
     console.log('Database synchronized successfully.');
 
-    // Call initialization methods after synchronization
-    initializeUserGroup();
-    initializeUser();
+    // Await the completion of each initialization method before proceeding to the next
+    await initializeUserRole();
+    await initializeUser();
+    await initializeAssetCategory();
+    await initializeAssetType();
+    await initializeAssetProfile();
+    await initializeBuildings();
+    await initializeRooms();
+
+    console.log('All initializations completed successfully.');
   })
   .catch(error => {
     console.error('Error synchronizing database:', error);
@@ -56,7 +64,7 @@ db.sequelize.sync()
 // API routes 
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
-require("./app/routes/userGroup.routes")(app);
+require("./app/routes/userRole.routes")(app);
 require("./app/routes/assetCategory.routes")(app);
 require("./app/routes/assetType.routes")(app);
 require("./app/routes/assetProfile.routes")(app);

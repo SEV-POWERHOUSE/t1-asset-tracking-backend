@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       roomNo: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true,
       },
       buildingId: {
         type: Sequelize.INTEGER,
