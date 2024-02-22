@@ -76,7 +76,7 @@ exports.bulkCreateAssetProfile = (req, res) => {
   data = convert(csvFile) // pass csv file to be converted
   console.log(data)
 
-  AssetType.bulkCreate(data)
+  AssetProfile.bulkCreate(data)
     .then(profiles => {
       res.status(201).json(profiles);
     })
