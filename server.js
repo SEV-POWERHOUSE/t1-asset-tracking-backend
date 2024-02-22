@@ -9,6 +9,8 @@ const { initializeUser } = require("./app/scripts/userInit")
 const { initializeAssetCategory} = require("./app/scripts/assetCategoryInit")
 const { initializeAssetType} = require("./app/scripts/assetTypeInit")
 const { initializeAssetProfile} = require("./app/scripts/assetProfileInit")
+const { initializeBuildings } = require("./app/scripts/buildingInit");
+const { initializeRooms } = require("./app/scripts/roomInit");
 const { dropSchema } = require("./app/scripts/dropSchema")
 
 
@@ -23,10 +25,6 @@ const { dropSchema } = require("./app/scripts/dropSchema")
 // } catch (error) {
 //   console.log("Error:", error)
 // }
-
-// We may not need this first sync since we also run sync right
-// before the initialization function calls
-// db.sequelize.sync();
 
 var corsOptions = {
   origin: ["http://localhost:8081", "https://asset.eaglesoftwareteam.com"],
@@ -52,6 +50,8 @@ db.sequelize.sync()
     await initializeAssetCategory();
     await initializeAssetType();
     await initializeAssetProfile();
+    await initializeBuildings();
+    await initializeRooms();
 
     console.log('All initializations completed successfully.');
   })
