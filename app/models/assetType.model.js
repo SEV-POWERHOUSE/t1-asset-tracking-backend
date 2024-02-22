@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       typeName: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       categoryId: {
         type: Sequelize.INTEGER,
@@ -21,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
         },
       },
       desc: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
     },

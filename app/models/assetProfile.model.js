@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       profileName: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       typeId: {
         type: Sequelize.INTEGER,
@@ -21,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
         },
       },
       desc: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
     },
