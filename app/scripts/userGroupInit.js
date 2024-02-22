@@ -8,12 +8,12 @@ async function initializeUserGroup() {
         await Promise.all([
             await userGroup.upsert({ name: 'Admin' }),
             await userGroup.upsert({ name: 'Unassigned' }),
-            await userGroup.upsert({ name: 'MaintenanceManager' }),
-            await userGroup.upsert({ name: 'MaintenanceWorker' }),
-            await userGroup.upsert({ name: 'ITManager' }),
-            await userGroup.upsert({ name: 'ITWorker' }),
-            await userGroup.upsert({ name: 'SupportCentralManager' }),
-            await userGroup.upsert({ name: 'SupportCentralWorker' }),
+            await userGroup.upsert({ name: 'Maintenance Manager' }),
+            await userGroup.upsert({ name: 'Maintenance Worker' }),
+            await userGroup.upsert({ name: 'IT Manager' }),
+            await userGroup.upsert({ name: 'IT Worker' }),
+            await userGroup.upsert({ name: 'Support Central Manager' }),
+            await userGroup.upsert({ name: 'Support Central Worker' }),
         ])
 
         console.log("User Group initialized successfully")

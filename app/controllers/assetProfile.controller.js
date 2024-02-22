@@ -1,22 +1,23 @@
 const db = require("../models");
 const AssetProfile = db.assetProfile;
+const AssetType = db.assetType;
 
 // Create and Save a new AssetProfile
 exports.createAssetProfile = (req, res) => {
   // Validate request
-  if (!req.body.typeId) {
-    // Removed profileId from validation
+  if (!req.body.typeId || !req.body.profileName) {
     res.status(400).send({
-      message: "Content can not be empty! Type ID is required.",
+      message:
+        "Content cannot be empty! Type ID and Profile Name are required.",
     });
     return;
   }
 
   // Create an AssetProfile
   const assetProfile = {
+    profileName: req.body.profileName,
     typeId: req.body.typeId,
     desc: req.body.desc || null,
-    // profileData is not included in the model so it should not be in the creation logic
   };
 
   // Save AssetProfile in the database
@@ -34,7 +35,15 @@ exports.createAssetProfile = (req, res) => {
 
 // Retrieve all AssetProfiles from the database.
 exports.getAllAssetProfiles = (req, res) => {
-  AssetProfile.findAll()
+  AssetProfile.findAll({
+    include: [
+      {
+        model: AssetType,
+        as: "assetType", // Must match the alias defined in the association
+        attributes: ["typeId", "typeName", "categoryId", "desc"], // Specify the attributes you want to include
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
@@ -50,7 +59,15 @@ exports.getAllAssetProfiles = (req, res) => {
 exports.getAssetProfileById = (req, res) => {
   const profileId = req.params.profileId;
 
-  AssetProfile.findByPk(profileId)
+  AssetProfile.findByPk(profileId, {
+    include: [
+      {
+        model: AssetType,
+        as: "assetType",
+        attributes: ["typeId", "typeName", "categoryId", "desc"],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -81,7 +98,7 @@ exports.updateAssetProfile = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot update asset profile with profileId=${profileId}. Maybe AssetProfile was not found or req.body is empty!`,
+          message: `Cannot update AssetProfile with profileId=${profileId}. Maybe AssetProfile was not found or req.body is empty!`,
         });
       }
     })
