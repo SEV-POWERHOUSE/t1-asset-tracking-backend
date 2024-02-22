@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const fileUpload = require('express-fileupload');
 const db = require("./app/models");
 const { initializeUserGroup } = require("./app/scripts/userGroupInit")
 const { initializeUser } = require("./app/scripts/userInit")
@@ -37,7 +38,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use(fileUpload());
 
 db.sequelize.sync()
   .then(() => {
