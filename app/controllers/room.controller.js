@@ -1,6 +1,6 @@
 const db = require("../models");
 const Room = db.room;
-const Op = db.Sequelize.Op;
+const Building = db.building;
 
 // Create and Save a new Room
 exports.createRoom = (req, res) => {
@@ -30,7 +30,14 @@ exports.createRoom = (req, res) => {
 
 // Retrieve all Rooms from the database.
 exports.getAllRooms = (req, res) => {
-  Room.findAll()
+  Room.findAll({
+    include: [
+      {
+        model: Building,
+        as: "building",
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
@@ -45,7 +52,14 @@ exports.getAllRooms = (req, res) => {
 exports.getRoomById = (req, res) => {
   const roomId = req.params.roomId;
 
-  Room.findByPk(roomId)
+  Room.findByPk(roomId, {
+    include: [
+      {
+        model: Building,
+        as: "building",
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -119,7 +133,9 @@ exports.deleteAllRooms = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Rooms were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Rooms were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
