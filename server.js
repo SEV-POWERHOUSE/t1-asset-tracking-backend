@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const db = require("./app/models");
-const { initializeUserGroup } = require("./app/scripts/userGroupInit")
+const { initializeUserRole } = require("./app/scripts/userRoleInit")
 const { initializeUser } = require("./app/scripts/userInit")
 const { initializeAssetCategory} = require("./app/scripts/assetCategoryInit")
 const { initializeAssetType} = require("./app/scripts/assetTypeInit")
@@ -45,7 +45,7 @@ db.sequelize.sync()
     console.log('Database synchronized successfully.');
 
     // Await the completion of each initialization method before proceeding to the next
-    await initializeUserGroup();
+    await initializeUserRole();
     await initializeUser();
     await initializeAssetCategory();
     await initializeAssetType();
@@ -63,7 +63,7 @@ db.sequelize.sync()
 // API routes 
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
-require("./app/routes/userGroup.routes")(app);
+require("./app/routes/userRole.routes")(app);
 require("./app/routes/assetCategory.routes")(app);
 require("./app/routes/assetType.routes")(app);
 require("./app/routes/assetProfile.routes")(app);

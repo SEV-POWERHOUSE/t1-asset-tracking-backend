@@ -15,8 +15,8 @@ module.exports = (app) => {
   // Update a User with id
   router.put("/:id", [authenticate], user.update);
 
-  // Update a User's group with id
-  router.put("/:id/group", [authenticate], user.updateGroup);
+  // Update a User's role with id
+  router.put("/:id/role", [authenticate], user.updateRole);
 
   // Delete a User with id
   router.delete("/:id", [authenticate], user.delete);
