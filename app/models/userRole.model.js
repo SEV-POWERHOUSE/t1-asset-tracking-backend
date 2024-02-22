@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const UserGroup = sequelize.define(
-    "userGroup",
+  const UserRole = sequelize.define(
+    "userRole",
     {
       id: {
         type: Sequelize.INTEGER,
@@ -18,5 +18,5 @@ module.exports = (sequelize, Sequelize) => {
       freezeTableName: true,
     }
   );
-  return UserGroup;
+  return UserRole;
 };

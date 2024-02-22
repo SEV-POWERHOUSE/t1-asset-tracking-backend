@@ -1,4 +1,4 @@
-const { initializeUserGroup } = require("./app/scripts/userGroupInit")
+const { initializeUserRole } = require("./app/scripts/userRoleInit")
 const { initializeUser } = require("./app/scripts/userInit")
 const db = require("./app/models")
 const dbConfig = require("./app/config/db.config")
@@ -6,8 +6,8 @@ const dbConfig = require("./app/config/db.config")
 db.sequelize.authenticate()
 .then(() => {
     console.log("Database connection successful")
-    // Run userGroupInit script
-    initializeUserGroup()
+    // Run userRoleInit script
+    initializeUserRole()
     // Run userInit script
     initializeUser()
 })

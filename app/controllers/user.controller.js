@@ -1,6 +1,6 @@
 const db = require("../models");
 const User = db.user;
-const UserGroup = db.userGroup;
+const UserRole = db.userRole;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     fName: req.body.fName,
     lName: req.body.lName,
     email: req.body.email,
-    userGroupId: req.body.userGroupId,
+    userRoleId: req.body.userRoleId,
     devPermission: req.body.devPermission,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Users from the database, including their associated UserGroups.
+// Retrieve all Users from the database, including their associated UserRoles.
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
@@ -44,8 +44,8 @@ exports.findAll = (req, res) => {
     where: condition,
     include: [
       {
-        model: UserGroup,
-        as: "userGroup",
+        model: UserRole,
+        as: "userRole",
         attributes: ["name"],
       },
     ],
@@ -132,34 +132,34 @@ exports.update = (req, res) => {
     });
 };
 
-exports.updateGroup = (req, res) => {
+exports.updateRole = (req, res) => {
   const id = req.params.id;
-  const userGroupId = req.body.userGroupId;
+  const userRoleId = req.body.userRoleId;
 
-  console.log(`Server: Received updateGroup request for user ${id} with group ${userGroupId}`, req.body);
+  console.log(`Server: Received updateRole request for user ${id} with role ${userRoleId}`, req.body);
 
-  console.log(`Updating user ${id} to group ${userGroupId}`);
+  console.log(`Updating user ${id} to role ${userRoleId}`);
 
   User.update(
-    { userGroupId: userGroupId },
+    { userRoleId: userRoleId },
     {
       where: { id: id },
     }
   )
     .then((num) => {
       if (num == 1) {
-        res.send({ message: "User's group was updated successfully." });
+        res.send({ message: "User's role was updated successfully." });
       } else {
         res.send({
-          message: `Cannot update User's group with id=${id}. Maybe User was not found or req.body is empty!`,
+          message: `Cannot update User's role with id=${id}. Maybe User was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
-      console.error("Error updating User's group:", err);
+      console.error("Error updating User's role:", err);
       res
         .status(500)
-        .send({ message: "Error updating User's group with id=" + id });
+        .send({ message: "Error updating User's role with id=" + id });
     });
 };
 

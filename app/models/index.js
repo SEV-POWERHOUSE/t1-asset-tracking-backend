@@ -15,7 +15,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.userGroup = require("./userGroup.model.js")(sequelize, Sequelize);
+db.userRole = require("./userRole.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 db.assetCategory = require("./assetCategory.model.js")(sequelize, Sequelize);
@@ -39,13 +39,13 @@ db.room = require("./room.model.js")(sequelize, Sequelize);
 db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
 
-// User and UserGroup
-db.userGroup.hasMany(db.user, {
-  foreignKey: "userGroupId",
+// User and UserRole
+db.userRole.hasMany(db.user, {
+  foreignKey: "userRoleId",
   onDelete: "SET NULL",
 });
-db.user.belongsTo(db.userGroup, {
-  foreignKey: "userGroupId",
+db.user.belongsTo(db.userRole, {
+  foreignKey: "userRoleId",
   onDelete: "SET NULL",
 });
 

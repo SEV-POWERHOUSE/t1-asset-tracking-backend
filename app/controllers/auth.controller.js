@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
           fName: firstName,
           lName: lastName,
           email: email,
-          userGroupId: data ? data.userGroupId : null,
+          userRoleId: data ? data.userRoleId : null,
           devPermission: false,
         };
       }
@@ -156,7 +156,7 @@ exports.login = async (req, res) => {
             fName: user.fName,
             lName: user.lName,
             userId: user.id,
-            userGroupId: user.userGroupId,
+            userRoleId: user.userRoleId,
             token: session.token,
             // refresh_token: user.refresh_token,
             // expiration_date: user.expiration_date
@@ -198,7 +198,7 @@ exports.login = async (req, res) => {
           fName: user.fName,
           lName: user.lName,
           userId: user.id,
-          userGroupId: user.userGroupId,
+          userRoleId: user.userRoleId,
           devPermission: user.devPermission,
           token: token,
           // refresh_token: user.refresh_token,
