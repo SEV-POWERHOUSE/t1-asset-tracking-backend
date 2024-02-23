@@ -1,6 +1,0 @@
-categoryId	categoryName	desc
-1	personalDevice	This category encompasses all portable electronic equipment that can be used for work or personal tasks. Examples include smartphones, laptops, tablets, and peripherals like keyboards and mice.
-2	infrastructure	This category includes assets that are part of the underlying framework of technology systems. It covers network equipment (routers, switches), servers, storage devices, and backup systems.
-3	facility	Assets under this category involve physical or tangible assets used in the maintenance and operations of a physical space. This includes security systems, HVAC systems, lighting, and furniture.
-4	roomDevice	projectors routers
-5	misc	other
