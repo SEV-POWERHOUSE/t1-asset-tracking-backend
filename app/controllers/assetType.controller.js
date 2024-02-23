@@ -33,60 +33,6 @@ exports.createAssetType = (req, res) => {
     });
 };
 
-// Bulk create assetTypes from csv
-exports.bulkCreateAssetType = (req, res) => {
-
-  // csv will be read in as hex values
-  // convert function that takes hex => utf8 characters 
-  const convert = function(csvFile) {
-    const convert = (from, to) => (str) => Buffer.from(str, from).toString(to)
-    const hexToUtf8 = convert('hex', 'utf8')
-    let csvData = hexToUtf8(csvFile.data).split('\r\n')
-    console.log(csvData)
-    let csvRows = []
-    csvData.forEach((data) => {
-      csvRows.push(data.split(','))
-    })
-    let data = []
-    for (let i = 1; i < csvRows.length; ++i) {
-      let dict = {}
-      for (let j = 0; j < csvRows[i].length; ++j) {
-        dict[csvRows[0][j]] = csvRows[i][j]
-      }
-      data.push(dict)
-    }
-    return data
-  }
-
-  if (!req.files || !req.files.file) {
-    res.status(404).send('File not found')
-    return
-  }
-  
-  if (req.files.file.mimetype !== 'text/csv') {
-    res.status(422).send(
-      util.apiResponse(0, toast.INVALID_FILE_FORMAT, {
-        err: 'File format is not valid',
-      }),
-    );
-    return
-  }
-
-  const csvFile = req.files.file
-  data = convert(csvFile) // pass csv file to be converted
-  console.log(data)
-
-  AssetType.bulkCreate(data)
-    .then(types => {
-      res.status(201).json(types);
-    })
-    .catch(error => {
-      res.status(500).send({
-        message: error.message || "Some error occurred while bulk creating the AssetTypes."
-      });
-  });
-}
-
 // Retrieve all AssetTypes from the database including their associated AssetCategory.
 exports.getAllAssetTypes = (req, res) => {
   AssetType.findAll({
