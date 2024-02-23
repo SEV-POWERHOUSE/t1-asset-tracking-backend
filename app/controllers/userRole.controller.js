@@ -38,7 +38,7 @@ exports.findAll = async (req, res) => {
 
 // Find a single UserRole with an id
 exports.findOne = async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.d;
   try {
     const userRole = await UserRole.findByPk(id);
     if (userRole) {
@@ -57,25 +57,19 @@ exports.findOne = async (req, res) => {
 
 // Update a UserRole by the id in the request
 exports.update = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const num = await UserRole.update(req.body, {
-      where: { id: id },
-    });
-    if (num == 1) {
-      res.send({
-        message: "UserRole was updated successfully.",
-      });
-    } else {
-      res.send({
-        message: `Cannot update UserRole with id=${id}. Maybe UserRole was not found or req.body is empty!`,
-      });
+    const userId = req.params.userId;
+    const { userRoleId } = req.body; // Extract the new role ID from the request body
+
+    try {
+        // Logic to update the user's role using the userId and new userRoleId
+        await User.update({ userRoleId: userRoleId }, { where: { id: userId } });
+        
+        // Send a success response
+        res.status(200).send({ message: "User role updated successfully" });
+    } catch (error) {
+        // Handle possible errors
+        res.status(400).send(error);
     }
-  } catch (err) {
-    res.status(500).send({
-      message: "Error updating UserRole with id=" + id,
-    });
-  }
 };
 
 // Delete a UserRole with the specified id in the request

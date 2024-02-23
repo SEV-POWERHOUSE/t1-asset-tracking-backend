@@ -13,10 +13,10 @@ module.exports = (app) => {
   router.get("/:userRoleId", userRole.findOne);
 
   // Update a UserRole with id
-  router.put("/:userRoleId", userRole.update);
+  router.put("/:userId/role", userRole.update);
 
   // Delete a UserRole with id
-  router.delete("/:userRoleId", userRole.delete);
+  router.delete("/:userId", userRole.delete);
 
   app.use("/asset-t1/userRole", router);
 };
