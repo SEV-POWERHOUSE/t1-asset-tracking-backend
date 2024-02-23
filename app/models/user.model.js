@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         references: {
           model: "userRole",
-          key: "id",
+          key: "userRoleId",
         },
         allowNull: true, // Allow null on user role deletion
         defaultValue: 2,
