@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require('express-fileupload')
 const app = express();
 const db = require("./app/models");
 const { initializeUserRole } = require("./app/scripts/userRoleInit")
@@ -37,6 +38,8 @@ app.options("*", cors(corsOptions)); // Enable pre-flight for all routes
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+app.use(fileUpload())
 
 
 

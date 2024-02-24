@@ -5,6 +5,9 @@ module.exports = (app) => {
   
     // Create a new AssetProfile
     router.post("/", [authenticate], assetProfile.createAssetProfile);
+
+    // Bulk create from csv
+    router.post("/file", [authenticate], assetProfile.bulkCreateAssetProfile)
   
     // Retrieve all AssetProfiles
     router.get("/", [authenticate], assetProfile.getAllAssetProfiles);
