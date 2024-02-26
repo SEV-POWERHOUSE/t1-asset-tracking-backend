@@ -40,10 +40,10 @@ async function initializeUser() {
         devPermission: false,
       }),
       user.upsert({
-        fName: "Marcus",
-        lName: "Bennett",
-        email: "marcus.bennett@eagles.oc.edu",
-        userRoleId: 6,
+        fName: "Garrett-Peter",
+        lName: "Thompson",
+        email: "gp.thompson@eagles.oc.edu",
+        userRoleId: 2,
         devPermission: false,
       }),
       user.upsert({
