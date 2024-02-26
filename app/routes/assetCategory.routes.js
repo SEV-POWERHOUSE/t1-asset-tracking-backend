@@ -3,11 +3,12 @@ module.exports = (app) => {
   const { authenticate } = require("../authorization/authorization.js");
   const router = require("express").Router();
 
-  // Create a new AssetCategory
-  router.post("/", [authenticate], assetCategory.createAssetCategory);
 
   // Bulk create from csv
   router.post("/file", [authenticate], assetCategory.bulkCreateAssetCategory)
+
+  // Create a new AssetCategory
+  router.post("/", [authenticate], assetCategory.createAssetCategory);
 
   // Retrieve all AssetCategories
   router.get("/", [authenticate], assetCategory.getAllAssetCategories);
