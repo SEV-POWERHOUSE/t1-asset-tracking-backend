@@ -35,9 +35,9 @@ async function initializePersons() {
         idNumber: "1000005",
       }),
       Person.upsert({
-        fName: "Marcus",
-        lName: "Bennett",
-        email: "marcus.bennett@eagles.oc.edu",
+        fName: "Garrett-Peter",
+        lName: "Thompson",
+        email: "gp.thompson@eagles.oc.edu",
         idNumber: "1000006",
       }),
       Person.upsert({
