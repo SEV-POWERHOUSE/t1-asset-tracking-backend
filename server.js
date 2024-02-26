@@ -12,6 +12,7 @@ const { initializeAssetType} = require("./app/scripts/assetTypeInit")
 const { initializeAssetProfile} = require("./app/scripts/assetProfileInit")
 const { initializeBuildings } = require("./app/scripts/buildingInit");
 const { initializeRooms } = require("./app/scripts/roomInit");
+const { initializePersons } = require("./app/scripts/personInit");
 const { dropSchema } = require("./app/scripts/dropSchema")
 
 
@@ -55,6 +56,7 @@ db.sequelize.sync()
     await initializeAssetProfile();
     await initializeBuildings();
     await initializeRooms();
+    await initializePersons();
 
     console.log('All initializations completed successfully.');
   })
