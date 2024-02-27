@@ -7,7 +7,7 @@ module.exports = (app) => {
   router.post("/", [authenticate], assetCategory.createAssetCategory);
 
   // Bulk create from csv
-  router.post("/:file", [authenticate], assetCategory.bulkCreateAssetCategory)
+  router.post("/send/file", [authenticate], assetCategory.bulkCreateAssetCategory)
 
   // Retrieve all AssetCategories
   router.get("/", [authenticate], assetCategory.getAllAssetCategories);
