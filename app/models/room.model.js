@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         unique: true,
       },
+      activeStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
       buildingId: {
         type: Sequelize.INTEGER,
         allowNull: false,

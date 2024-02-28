@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Building
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.name) {
+  if (!req.body.name || req.body.activeStatus) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -17,6 +17,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     abbreviation: req.body.abbreviation,
     noOfRooms: req.body.noOfRooms,
+    activeStatus: req.body.activeStatus,
   };
   // Save Building in the database
   Building.create(building)
