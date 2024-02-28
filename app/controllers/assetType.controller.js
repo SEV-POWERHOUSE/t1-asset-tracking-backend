@@ -5,7 +5,7 @@ const AssetCategory = db.assetCategory;
 // Create and Save a new AssetType
 exports.createAssetType = (req, res) => {
   // Validate request
-  if (!req.body.typeName || !req.body.categoryId) {
+  if (!req.body.typeName || !req.body.categoryId || req.body.activeStatus ) {
     res.status(400).send({
       message:
         "Content cannot be empty! Type name, desc, and category ID are required.",
@@ -18,6 +18,7 @@ exports.createAssetType = (req, res) => {
     typeName: req.body.typeName,
     desc: req.body.desc,
     categoryId: req.body.categoryId,
+    activeStatus: req.body.activeStatus,
   };
 
   // Save AssetType in the database
