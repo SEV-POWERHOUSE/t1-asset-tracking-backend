@@ -25,7 +25,12 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      activeStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
     },
+    
     {
       timestamps: false,
       freezeTableName: true,
