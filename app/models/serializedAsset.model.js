@@ -24,6 +24,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      activeStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       timestamps: false,
