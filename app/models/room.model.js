@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       roomNo: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
