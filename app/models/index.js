@@ -186,22 +186,23 @@ db.buildingAsset.belongsTo(db.building, {
 db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
 db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
 
-//BuildingAsset and SerializedAsset Link
-db.buildingAsset.hasMany(db.serializedAsset, {
-  foreignKey: "buildingAssetId",
-  onDelete: "CASCADE",
-});
-db.serializedAsset.belongsTo(db.buildingAsset, {
-  foreignKey: "buildingAssetId",
-  onDelete: "CASCADE",
-});
-
-//RoomAsset and SerializedAsset Link
-db.roomAsset.hasMany(db.serializedAsset, {
+// BuildingAsset has a SerializedAsset
+db.serializedAsset.hasOne(db.buildingAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });
-db.serializedAsset.belongsTo(db.roomAsset, {
+db.buildingAsset.belongsTo(db.serializedAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+
+
+// RoomAsset has a SerializedAsset
+db.serializedAsset.hasOne(db.roomAsset, {
+  foreignKey: "serializedAssetId",
+  onDelete: "CASCADE",
+});
+db.roomAsset.belongsTo(db.serializedAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });

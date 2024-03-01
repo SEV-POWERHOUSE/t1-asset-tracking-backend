@@ -1,10 +1,11 @@
 const db = require("../models");
+const AssetProfile = db.assetProfile;
 const SerializedAsset = db.serializedAsset;
 
 // Create and Save a new SerializedAsset
 exports.createSerializedAsset = (req, res) => {
   // Validate request for required fields
-  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes) {
+  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes || req.body.activeStatus) {
     res.status(400).send({
       message:
         "Content cannot be empty! Serialized number, profile ID, and notes are required.",
@@ -17,6 +18,7 @@ exports.createSerializedAsset = (req, res) => {
     serializedNumber: req.body.serializedNumber,
     profileId: req.body.profileId,
     notes: req.body.notes,
+    activeStatus: req.body.activeStatus,
   };
 
   // Create a SerializedAsset in the database
@@ -35,7 +37,15 @@ exports.createSerializedAsset = (req, res) => {
 
 // Retrieve all SerializedAssets from the database.
 exports.getAllSerializedAssets = (req, res) => {
-  SerializedAsset.findAll()
+  SerializedAsset.findAll({
+    include: [
+      {
+        model: AssetProfile,
+        as: "assetProfile",
+        attributes: ["profileId", "profileName", "typeId", "desc"],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
@@ -52,7 +62,15 @@ exports.getAllSerializedAssets = (req, res) => {
 exports.getSerializedAssetById = (req, res) => {
   const serializedAssetId = req.params.serializedAssetId;
 
-  SerializedAsset.findByPk(serializedAssetId)
+  SerializedAsset.findByPk(serializedAssetId, {
+    include: [
+      {
+        model: AssetProfile,
+        as: "assetProfile",
+        attributes: ["profileId", "profileName", "typeId", "desc"],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
