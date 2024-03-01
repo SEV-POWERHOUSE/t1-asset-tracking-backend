@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       personId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
           model: "person",
