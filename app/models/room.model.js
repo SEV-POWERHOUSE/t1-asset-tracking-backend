@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     "room",
     {
       roomId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
