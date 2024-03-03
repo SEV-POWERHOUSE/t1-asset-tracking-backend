@@ -5,7 +5,7 @@ const AssetType = db.assetType;
 // Create and Save a new AssetProfile
 exports.createAssetProfile = (req, res) => {
   // Validate request
-  if (!req.body.typeId || !req.body.profileName || req.body.activeStatus) {
+  if (!req.body.typeId || !req.body.profileName) {
     res.status(400).send({
       message:
         "Content cannot be empty! Type ID and Profile Name are required.",

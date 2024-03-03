@@ -5,7 +5,7 @@ const SerializedAsset = db.serializedAsset;
 // Create and Save a new SerializedAsset
 exports.createSerializedAsset = (req, res) => {
   // Validate request for required fields
-  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes || req.body.activeStatus) {
+  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes) {
     res.status(400).send({
       message:
         "Content cannot be empty! Serialized number, profile ID, and notes are required.",
