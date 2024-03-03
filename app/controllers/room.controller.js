@@ -5,7 +5,7 @@ const Building = db.building;
 // Create and Save a new Room
 exports.createRoom = (req, res) => {
   // Validate request
-  if (!req.body.roomNo || !req.body.buildingId || req.body.activeStatus) {
+  if (!req.body.roomNo || !req.body.buildingId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });

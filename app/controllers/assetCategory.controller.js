@@ -4,7 +4,7 @@ const AssetCategory = db.assetCategory;
 // Create and Save a new AssetCategory
 exports.createAssetCategory = (req, res) => {
   // Validate request
-  if (!req.body.categoryName || req.body.activeStatus) {
+  if (!req.body.categoryName) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
