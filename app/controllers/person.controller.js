@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Person
 exports.createPerson = (req, res) => {
   // Validate request
-  if (!req.body.fName || !req.body.lName || !req.body.email || !req.body.idNumber) {
+  if (!req.body.fName || !req.body.lName || !req.body.email || !req.body.idNumber || req.body.activeStatus) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -19,6 +19,7 @@ exports.createPerson = (req, res) => {
     lName: req.body.lName,
     email: req.body.email,
     idNumber: req.body.idNumber,
+    activeStatus: req.body.activeStatus,
   };
 
   // Save Person in the database
