@@ -10,13 +10,13 @@ module.exports = (app) => {
     router.get("/", [authenticate], personAsset.getAllPersonAssets);
   
     // Retrieve a single  PersonAsset by  PersonAssetId
-    router.get("/:warrantyId", [authenticate], personAsset.getPersonAssetById);
+    router.get("/:personAssetId", [authenticate], personAsset.getPersonAssetById);
   
     // Update a  PersonAsset by  PersonAssetId
-    router.put("/:warrantyId", [authenticate], personAsset.updatePersonAsset);
+    router.put("/:personAssetId", [authenticate], personAsset.updatePersonAsset);
   
     // Delete a  PersonAsset by  PersonAssetId
-    router.delete("/:warrantyId", [authenticate], personAsset.deletePersonAsset);
+    router.delete("/:personAssetId", [authenticate], personAsset.deletePersonAsset);
   
     // Delete all  PersonAsset
     router.delete("/", [authenticate], personAsset.deleteAllPersonAssets);

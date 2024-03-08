@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Service
 exports.createService = (req, res) => {
   // Validate request
-  if (!req.body.serviceId || !req.body.vendor || !req.body.type || !req.body.startDate || !req.body.serialAssetId) {
+  if (!req.body.serviceId || !req.body.vendor || !req.body.type || !req.body.startDate || !req.body.serializedAssetId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -20,7 +20,7 @@ exports.createService = (req, res) => {
     startDate: req.body.startDate,
     endDate: req.body.endDate || null,
     length: req.body.length || null,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save Service in the database
