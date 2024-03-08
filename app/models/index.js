@@ -53,14 +53,17 @@ db.user.belongsTo(db.userRole, {
 db.user.hasMany(db.session, { foreignKey: "userId", onDelete: "CASCADE" });
 db.session.belongsTo(db.user, { foreignKey: "userId", onDelete: "CASCADE" });
 
-//AssetCategory and AssetType Link
-db.assetCategory.hasMany(db.assetType, { foreignKey: "categoryId", onDelete: "CASCADE" });
+// AssetCategory and AssetType Link
+db.assetCategory.hasMany(db.assetType, {
+  foreignKey: "categoryId",
+  onDelete: "CASCADE",
+});
 db.assetType.belongsTo(db.assetCategory, {
   foreignKey: "categoryId",
   onDelete: "CASCADE",
 });
 
-// //AssetType and AssetProfile Link
+// AssetType and AssetProfile Link
 db.assetType.hasMany(db.assetProfile, {
   foreignKey: "typeId",
   onDelete: "CASCADE",
@@ -70,7 +73,7 @@ db.assetProfile.belongsTo(db.assetType, {
   onDelete: "CASCADE",
 });
 
-//AssetProfile and ProfileData Link
+// AssetProfile and ProfileData Link
 db.assetProfile.hasMany(db.profileData, {
   foreignKey: "profileId",
   onDelete: "CASCADE",
@@ -80,7 +83,7 @@ db.profileData.belongsTo(db.assetProfile, {
   onDelete: "CASCADE",
 });
 
-//Asset Profile and SerializedAsset Link
+// Asset Profile and SerializedAsset Link
 db.assetProfile.hasMany(db.serializedAsset, {
   foreignKey: "profileId",
   onDelete: "CASCADE",
@@ -90,7 +93,7 @@ db.serializedAsset.belongsTo(db.assetProfile, {
   onDelete: "CASCADE",
 });
 
-//Lease and SerializedAsset Link
+// Lease and SerializedAsset Link
 db.serializedAsset.hasOne(db.lease, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
@@ -100,7 +103,7 @@ db.lease.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-//Warranty and SerializedAsset Link
+// Warranty and SerializedAsset Link
 db.serializedAsset.hasOne(db.warranty, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
@@ -110,7 +113,7 @@ db.warranty.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-//Service and SerializedAsset Link
+// Service and SerializedAsset Link
 db.serializedAsset.hasOne(db.service, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
@@ -120,7 +123,7 @@ db.service.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-//Person and PersonAsset Link
+// Person and PersonAsset Link
 db.person.hasMany(db.personAsset, {
   foreignKey: "personId",
   onDelete: "CASCADE",
@@ -130,10 +133,9 @@ db.personAsset.belongsTo(db.person, {
   onDelete: "CASCADE",
 });
 
-//PersonAsset and SerializedAsset Link
+// PersonAsset and SerializedAsset Link
 db.serializedAsset.hasOne(db.personAsset, {
-  //should be has many?? - sg
-  foreignKey: "serializedAssetId", //serialized asset has personAsset? or other way?
+  foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
 });
 db.personAsset.belongsTo(db.serializedAsset, {
@@ -141,11 +143,11 @@ db.personAsset.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-//Log and LogType Link
+// Log and LogType Link
 db.logType.hasMany(db.log, { foreignKey: "logTypeId", onDelete: "CASCADE" });
 db.log.belongsTo(db.logType, { foreignKey: "logTypeId", onDelete: "CASCADE" });
 
-//PersonAsset and Log Link
+// PersonAsset and Log Link
 db.personAsset.hasMany(db.log, {
   foreignKey: "personAssetId",
   onDelete: "CASCADE",
@@ -155,7 +157,7 @@ db.log.belongsTo(db.personAsset, {
   onDelete: "CASCADE",
 });
 
-//SerializedAsset and Barcode Link
+// SerializedAsset and Barcode Link
 db.serializedAsset.hasMany(db.barcode, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
@@ -165,7 +167,7 @@ db.barcode.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-//Building and Rooms Link
+// Building and Rooms Link
 db.building.hasMany(db.room, { foreignKey: "buildingId", onDelete: "CASCADE" });
 db.room.belongsTo(db.building, {
   foreignKey: "buildingId",
@@ -182,11 +184,11 @@ db.buildingAsset.belongsTo(db.building, {
   onDelete: "CASCADE",
 });
 
-//Room and Room Asset Link
+// Room and Room Asset Link
 db.room.hasMany(db.roomAsset, { foreignKey: "roomId", onDelete: "CASCADE" });
 db.roomAsset.belongsTo(db.room, { foreignKey: "roomId", onDelete: "CASCADE" });
 
-// BuildingAsset has a SerializedAsset
+// BuildingAsset and SerializedAsset Link
 db.serializedAsset.hasOne(db.buildingAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",
@@ -196,8 +198,7 @@ db.buildingAsset.belongsTo(db.serializedAsset, {
   onDelete: "CASCADE",
 });
 
-
-// RoomAsset has a SerializedAsset
+// RoomAsset and SerializedAsset Link
 db.serializedAsset.hasOne(db.roomAsset, {
   foreignKey: "serializedAssetId",
   onDelete: "CASCADE",

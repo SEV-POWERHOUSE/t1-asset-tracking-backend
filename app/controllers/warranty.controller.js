@@ -5,7 +5,13 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Warranty
 exports.createWarranty = (req, res) => {
   // Validate request
-  if (!req.body.warrantyId || !req.body.warrantyType || !req.body.endDate || !req.body.length || !req.body.serializedAssetId) {
+  if (
+    !req.body.warrantyId ||
+    !req.body.warrantyType ||
+    !req.body.endDate ||
+    !req.body.length ||
+    !req.body.serializedAssetId
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -28,7 +34,8 @@ exports.createWarranty = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Warranty.",
+        message:
+          err.message || "Some error occurred while creating the Warranty.",
       });
     });
 };
@@ -41,7 +48,8 @@ exports.getAllWarranties = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving warranties.",
+        message:
+          err.message || "Some error occurred while retrieving warranties.",
       });
     });
 };
@@ -124,11 +132,14 @@ exports.deleteAllWarranties = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Warranties were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Warranties were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all warranties.",
+        message:
+          err.message || "Some error occurred while removing all warranties.",
       });
     });
 };

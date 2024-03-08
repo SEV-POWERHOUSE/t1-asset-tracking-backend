@@ -30,8 +30,7 @@ exports.findAll = async (req, res) => {
     res.send(userRoles);
   } catch (err) {
     res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving UserRoles.",
+      message: err.message || "Some error occurred while retrieving UserRoles.",
     });
   }
 };
@@ -100,4 +99,3 @@ exports.delete = async (req, res) => {
     });
   }
 };
-

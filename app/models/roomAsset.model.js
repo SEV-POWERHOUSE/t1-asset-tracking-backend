@@ -24,6 +24,23 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
+      checkoutDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      expectedCheckinDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      checkinDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      checkoutStatus: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
     },
     {
       timestamps: false,

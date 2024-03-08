@@ -5,7 +5,12 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Person
 exports.createPerson = (req, res) => {
   // Validate request
-  if (!req.body.fName || !req.body.lName || !req.body.email || !req.body.idNumber) {
+  if (
+    !req.body.fName ||
+    !req.body.lName ||
+    !req.body.email ||
+    !req.body.idNumber
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -29,7 +34,8 @@ exports.createPerson = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Person.",
+        message:
+          err.message || "Some error occurred while creating the Person.",
       });
     });
 };
@@ -125,11 +131,14 @@ exports.deleteAllPersons = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Persons were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Persons were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all persons.",
+        message:
+          err.message || "Some error occurred while removing all persons.",
       });
     });
 };

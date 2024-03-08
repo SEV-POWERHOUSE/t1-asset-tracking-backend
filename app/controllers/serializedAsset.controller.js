@@ -19,6 +19,7 @@ exports.createSerializedAsset = (req, res) => {
     profileId: req.body.profileId,
     notes: req.body.notes,
     activeStatus: req.body.activeStatus,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Create a SerializedAsset in the database
@@ -150,11 +151,9 @@ exports.deleteAllSerializedAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res
-        .status(200)
-        .send({
-          message: `${nums} SerializedAssets were deleted successfully!`,
-        });
+      res.status(200).send({
+        message: `${nums} SerializedAssets were deleted successfully!`,
+      });
     })
     .catch((err) => {
       res.status(500).send({

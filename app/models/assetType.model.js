@@ -30,7 +30,7 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: true,
       },
     },
-    
+
     {
       timestamps: false,
       freezeTableName: true,
