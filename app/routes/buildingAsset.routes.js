@@ -9,14 +9,14 @@ module.exports = (app) => {
     // Retrieve all BuildingAssets
     router.get("/", [authenticate], buildingAsset.getAllBuildingAssets);
   
-    // Retrieve a single BuildingAsset by buildingId
-    router.get("/:buildingId", [authenticate], buildingAsset.getBuildingAssetById);
+    // Retrieve a single BuildingAsset by buildingAssetId
+    router.get("/:buildingAssetId", [authenticate], buildingAsset.getBuildingAssetById);
   
-    // Update a BuildingAsset by buildingId
-    router.put("/:buildingId", [authenticate], buildingAsset.updateBuildingAsset);
+    // Update a BuildingAsset by buildingAssetId
+    router.put("/:buildingAssetId", [authenticate], buildingAsset.updateBuildingAsset);
   
-    // Delete a BuildingAsset by buildingId
-    router.delete("/:buildingId", [authenticate], buildingAsset.deleteBuildingAsset);
+    // Delete a BuildingAsset by buildingAssetId
+    router.delete("/:buildingAssetId", [authenticate], buildingAsset.deleteBuildingAsset);
   
     // Delete all BuildingAssets
     router.delete("/", [authenticate], buildingAsset.deleteAllBuildingAssets);

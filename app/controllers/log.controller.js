@@ -122,7 +122,9 @@ exports.deleteAllLogs = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Logs were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Logs were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({

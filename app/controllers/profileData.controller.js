@@ -26,7 +26,8 @@ exports.createProfileData = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the ProfileData.",
+        message:
+          err.message || "Some error occurred while creating the ProfileData.",
       });
     });
 };
@@ -39,7 +40,8 @@ exports.getAllProfileData = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving profile data.",
+        message:
+          err.message || "Some error occurred while retrieving profile data.",
       });
     });
 };
@@ -122,11 +124,14 @@ exports.deleteAllProfileData = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} ProfileData were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} ProfileData were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all profile data.",
+        message:
+          err.message || "Some error occurred while removing all profile data.",
       });
     });
 };

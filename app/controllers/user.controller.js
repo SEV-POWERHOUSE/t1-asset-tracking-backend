@@ -136,7 +136,10 @@ exports.updateRole = (req, res) => {
   const id = req.params.id;
   const userRoleId = req.body.userRoleId;
 
-  console.log(`Server: Received updateRole request for user ${id} with role ${userRoleId}`, req.body);
+  console.log(
+    `Server: Received updateRole request for user ${id} with role ${userRoleId}`,
+    req.body
+  );
 
   console.log(`Updating user ${id} to role ${userRoleId}`);
 

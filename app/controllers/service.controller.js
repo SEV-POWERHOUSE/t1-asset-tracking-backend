@@ -5,7 +5,13 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Service
 exports.createService = (req, res) => {
   // Validate request
-  if (!req.body.serviceId || !req.body.vendor || !req.body.type || !req.body.startDate || !req.body.serializedAssetId) {
+  if (
+    !req.body.serviceId ||
+    !req.body.vendor ||
+    !req.body.type ||
+    !req.body.startDate ||
+    !req.body.serializedAssetId
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -30,7 +36,8 @@ exports.createService = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Service.",
+        message:
+          err.message || "Some error occurred while creating the Service.",
       });
     });
 };
@@ -43,7 +50,8 @@ exports.getAllServices = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving services.",
+        message:
+          err.message || "Some error occurred while retrieving services.",
       });
     });
 };
@@ -126,11 +134,14 @@ exports.deleteAllServices = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Services were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Services were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all services.",
+        message:
+          err.message || "Some error occurred while removing all services.",
       });
     });
 };

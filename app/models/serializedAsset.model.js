@@ -31,12 +31,19 @@ module.exports = (sequelize, Sequelize) => {
       serializedAssetName: {
         type: Sequelize.VIRTUAL,
         get() {
-          return `${this.get('assetProfile')?.profileName} (${this.serialNumber})`;
+          return `${this.get("assetProfile")?.profileName} (${
+            this.serialNumber
+          })`;
         },
         // Note: Since it's a virtual field, no setter is defined
       },
+      checkoutStatus: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
-    
+
     {
       timestamps: false,
       freezeTableName: true,

@@ -1,5 +1,7 @@
 const db = require("../models");
 const RoomAsset = db.roomAsset;
+const Room = db.room;
+const SerializedAsset = db.serializedAsset;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new RoomAsset
@@ -16,6 +18,10 @@ exports.createRoomAsset = (req, res) => {
   const roomAsset = {
     roomId: req.body.roomId,
     serializedAssetId: req.body.serializedAssetId,
+    checkoutDate: req.body.checkoutDate,
+    checkinDate: req.body.checkinDate,
+    expectedCheckinDate: req.body.expectedCheckinDate,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Save RoomAsset in the database
@@ -25,20 +31,42 @@ exports.createRoomAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the RoomAsset.",
+        message:
+          err.message || "Some error occurred while creating the RoomAsset.",
       });
     });
 };
 
 // Retrieve all RoomAssets from the database.
 exports.getAllRoomAssets = (req, res) => {
-  RoomAsset.findAll()
+  RoomAsset.findAll({
+    include: [
+      {
+        model: Room,
+        as: "room",
+        attributes: ["roomId", "roomNo", "buildingId", "activeStatus"],
+      },
+      {
+        model: SerializedAsset,
+        as: "serializedAsset",
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "serializedAssetName",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving room assets.",
+        message:
+          err.message || "Some error occurred while retrieving room assets.",
       });
     });
 };
@@ -47,7 +75,25 @@ exports.getAllRoomAssets = (req, res) => {
 exports.getRoomAssetByRoomId = (req, res) => {
   const roomId = req.params.roomId;
 
-  RoomAsset.findByPk(roomId)
+  RoomAsset.findByPk(roomId, {
+    include: [
+      {
+        model: Room,
+        as: "room",
+        attributes: ["roomId", "roomNo", "buildingId", "activeStatus"],
+      },
+      {
+        model: SerializedAsset,
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -121,11 +167,14 @@ exports.deleteAllRoomAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} RoomAssets were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} RoomAssets were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all room assets.",
+        message:
+          err.message || "Some error occurred while removing all room assets.",
       });
     });
 };

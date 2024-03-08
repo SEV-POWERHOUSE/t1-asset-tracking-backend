@@ -1,5 +1,7 @@
 const db = require("../models");
 const BuildingAsset = db.buildingAsset;
+const Building = db.building;
+const SerializedAsset = db.serializedAsset;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new BuildingAsset
@@ -16,6 +18,10 @@ exports.createBuildingAsset = (req, res) => {
   const buildingAsset = {
     buildingId: req.body.buildingId,
     serializedAssetId: req.body.serializedAssetId,
+    checkoutDate: req.body.checkoutDate,
+    checkinDate: req.body.checkinDate,
+    expectedCheckinDate: req.body.expectedCheckinDate,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Save BuildingAsset in the database
@@ -25,20 +31,50 @@ exports.createBuildingAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the BuildingAsset.",
+        message:
+          err.message ||
+          "Some error occurred while creating the BuildingAsset.",
       });
     });
 };
 
 // Retrieve all BuildingAssets from the database.
 exports.getAllBuildingAssets = (req, res) => {
-  BuildingAsset.findAll()
+  BuildingAsset.findAll({
+    include: [
+      {
+        model: Building,
+        as: "building",
+        attributes: [
+          "buildingId",
+          "name",
+          "abbreviation",
+          "noOfRooms",
+          "activeStatus",
+        ],
+      },
+      {
+        model: SerializedAsset,
+        as: "serializedAsset",
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "serializedAssetName",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving building assets.",
+        message:
+          err.message ||
+          "Some error occurred while retrieving building assets.",
       });
     });
 };
@@ -47,7 +83,31 @@ exports.getAllBuildingAssets = (req, res) => {
 exports.getBuildingAssetById = (req, res) => {
   const buildingId = req.params.buildingId;
 
-  BuildingAsset.findByPk(buildingId)
+  BuildingAsset.findByPk(buildingId, {
+    include: [
+      {
+        model: Building,
+        as: "building",
+        attributes: [
+          "buildingId",
+          "name",
+          "abbreviation",
+          "noOfRooms",
+          "activeStatus",
+        ],
+      },
+      {
+        model: SerializedAsset,
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -121,11 +181,15 @@ exports.deleteAllBuildingAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} BuildingAssets were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} BuildingAssets were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all building assets.",
+        message:
+          err.message ||
+          "Some error occurred while removing all building assets.",
       });
     });
 };
