@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new RoomAsset
 exports.createRoomAsset = (req, res) => {
   // Validate request
-  if (!req.body.roomId || !req.body.serialAssetId) {
+  if (!req.body.roomId || !req.body.serializedAssetId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -15,7 +15,7 @@ exports.createRoomAsset = (req, res) => {
   // Create a RoomAsset
   const roomAsset = {
     roomId: req.body.roomId,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save RoomAsset in the database

@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Warranty
 exports.createWarranty = (req, res) => {
   // Validate request
-  if (!req.body.warrantyId || !req.body.warrantyType || !req.body.endDate || !req.body.length || !req.body.serialAssetId) {
+  if (!req.body.warrantyId || !req.body.warrantyType || !req.body.endDate || !req.body.length || !req.body.serializedAssetId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -18,7 +18,7 @@ exports.createWarranty = (req, res) => {
     warrantyType: req.body.warrantyType,
     endDate: req.body.endDate,
     length: req.body.length,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save Warranty in the database

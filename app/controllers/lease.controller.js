@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Lease
 exports.createLease = (req, res) => {
   // Validate request
-  if (!req.body.leaseId || !req.body.term || !req.body.endDate || !req.body.length || !req.body.serialAssetId) {
+  if (!req.body.leaseId || !req.body.term || !req.body.endDate || !req.body.length || !req.body.serializedAssetId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -18,7 +18,7 @@ exports.createLease = (req, res) => {
     term: req.body.term,
     endDate: req.body.endDate,
     length: req.body.length,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save Lease in the database
