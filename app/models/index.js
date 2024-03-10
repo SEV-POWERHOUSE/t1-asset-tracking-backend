@@ -38,7 +38,6 @@ db.building = require("./building.model.js")(sequelize, Sequelize);
 db.room = require("./room.model.js")(sequelize, Sequelize);
 db.buildingAsset = require("./buildingAsset.model.js")(sequelize, Sequelize);
 db.roomAsset = require("./roomAsset.model.js")(sequelize, Sequelize);
-
 // User and UserRole
 db.userRole.hasMany(db.user, {
   foreignKey: "userRoleId",
@@ -77,7 +76,6 @@ db.assetProfile.hasMany(db.profileData, {
 });
 db.profileData.belongsTo(db.assetProfile, {
   foreignKey: "profileId",
-  onDelete: "CASCADE",
 });
 
 //Asset Profile and SerializedAsset Link

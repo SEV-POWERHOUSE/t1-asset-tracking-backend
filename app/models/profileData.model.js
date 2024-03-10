@@ -3,26 +3,28 @@ module.exports = (sequelize, Sequelize) => {
     "profileData",
     {
       profileDataId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
       },
-      dataName: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      // Name of the data field
+      field: {
+          type: Sequelize.TEXT,
+          allowNull: true,
       },
-      dataDesc: {
-        type: Sequelize.STRING,
-        allowNull: true,
+      // Data field for asset data that needs to be saved
+      data: {
+          type: Sequelize.TEXT,
+          allowNull: true,
       },
       profileId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "assetProfile",
-          key: "profileId",
-        },
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: "assetProfile",
+            key: "profileId",
+          },
       },
     },
     {
@@ -32,3 +34,6 @@ module.exports = (sequelize, Sequelize) => {
   );
   return ProfileData;
 };
+
+
+// Love, Zane (I edited it)
