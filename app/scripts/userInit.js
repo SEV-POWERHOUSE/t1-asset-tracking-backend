@@ -1,3 +1,4 @@
+
 const db = require("../models");
 const user = db.user;
 
@@ -10,6 +11,10 @@ async function initializeUser() {
         email: "jaxen.mcray@eagles.oc.edu",
         userRoleId: 1,
         devPermission: true,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: true,
       }),
       user.upsert({
         fName: "Zane",
@@ -17,6 +22,10 @@ async function initializeUser() {
         email: "z.fike@eagles.oc.edu",
         userRoleId: 1,
         devPermission: true,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: true,
       }),
       user.upsert({
         fName: "Solomon",
@@ -24,6 +33,10 @@ async function initializeUser() {
         email: "solomon.granger@eagles.oc.edu",
         userRoleId: 1,
         devPermission: true,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: true,
       }),
       user.upsert({
         fName: "Justin",
@@ -31,6 +44,10 @@ async function initializeUser() {
         email: "justin.davis@eagles.oc.edu",
         userRoleId: 1,
         devPermission: true,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: true,
       }),
       user.upsert({
         fName: "Emily",
@@ -38,6 +55,10 @@ async function initializeUser() {
         email: "emily.wong@eagles.oc.edu",
         userRoleId: 5,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Garrett-Peter",
@@ -45,6 +66,10 @@ async function initializeUser() {
         email: "gp.thompson@eagles.oc.edu",
         userRoleId: 2,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Arthur",
@@ -52,6 +77,10 @@ async function initializeUser() {
         email: "arthur.morgan@eagles.oc.edu",
         userRoleId: 3,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Lucas",
@@ -59,6 +88,10 @@ async function initializeUser() {
         email: "lucas.morris@eagles.oc.edu",
         userRoleId: 4,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Sophia",
@@ -66,6 +99,10 @@ async function initializeUser() {
         email: "sophia.garcia@eagles.oc.edu",
         userRoleId: 7,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Ethan",
@@ -73,6 +110,10 @@ async function initializeUser() {
         email: "ethan.lee@eagles.oc.edu",
         userRoleId: 8,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Alex",
@@ -80,6 +121,10 @@ async function initializeUser() {
         email: "alex.johnson@eagles.oc.edu",
         userRoleId: 2,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Isabella",
@@ -87,6 +132,10 @@ async function initializeUser() {
         email: "isabella.martinez@eagles.oc.edu",
         userRoleId: 1,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: true,
       }),
       user.upsert({
         fName: "Elijah",
@@ -94,6 +143,10 @@ async function initializeUser() {
         email: "elijah.hernandez@eagles.oc.edu",
         userRoleId: 5,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Zoe",
@@ -101,6 +154,10 @@ async function initializeUser() {
         email: "zoe.robinson@eagles.oc.edu",
         userRoleId: 6,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Adrian",
@@ -108,6 +165,10 @@ async function initializeUser() {
         email: "adrian.clark@eagles.oc.edu",
         userRoleId: 3,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Samantha",
@@ -115,6 +176,10 @@ async function initializeUser() {
         email: "samantha.lewis@eagles.oc.edu",
         userRoleId: 4,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Ian",
@@ -122,6 +187,10 @@ async function initializeUser() {
         email: "ian.walker@eagles.oc.edu",
         userRoleId: 7,
         devPermission: false,
+        canEdit: true,
+        canArchive: true,
+        canActivate: true, 
+        canDelete: false,
       }),
       user.upsert({
         fName: "Julia",
@@ -129,6 +198,10 @@ async function initializeUser() {
         email: "julia.perez@eagles.oc.edu",
         userRoleId: 8,
         devPermission: false,
+        canEdit: false,
+        canArchive: false,
+        canActivate: false, 
+        canDelete: false,
       }),
     ]);
     console.log("Users initialized successfully");

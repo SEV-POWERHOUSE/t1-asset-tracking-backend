@@ -20,6 +20,10 @@ exports.create = (req, res) => {
     email: req.body.email,
     userRoleId: req.body.userRoleId,
     devPermission: req.body.devPermission,
+    canEdit: req.body.canEdit,
+    canArchive: req.body.canArchive,
+    canArchive: req.body.canArchive,
+    canDelete: req.body.canDelete,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
   };
