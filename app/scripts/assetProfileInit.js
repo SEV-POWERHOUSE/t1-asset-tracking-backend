@@ -88,12 +88,6 @@ async function initializeAssetProfile() {
       activeStatus: 1,
     },
     {
-      profileName: "Bose QuietComfort 35 II",
-      typeId: 5,
-      desc: "Wireless noise-cancelling headphones.",
-      activeStatus: 1,
-    },
-    {
       profileName: "Netgear Nighthawk R7000",
       typeId: 7,
       desc: "Wi-Fi router for high-speed internet.",
