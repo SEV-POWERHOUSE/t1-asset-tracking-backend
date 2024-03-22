@@ -7,7 +7,11 @@ const Op = db.Sequelize.Op;
 // Create and Save a new RoomAsset
 exports.createRoomAsset = (req, res) => {
   // Validate request
-  if (!req.body.roomId || !req.body.serializedAssetId) {
+  if (
+    !req.body.roomId ||
+    !req.body.serializedAssetId ||
+    !req.body.checkoutDate
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -71,11 +75,11 @@ exports.getAllRoomAssets = (req, res) => {
     });
 };
 
-// Find a single RoomAsset with a roomId
-exports.getRoomAssetByRoomId = (req, res) => {
-  const roomId = req.params.roomId;
+// Find a single RoomAsset with a roomAssetId
+exports.getRoomAssetById = (req, res) => {
+  const roomAssetId = req.params.roomAssetId;
 
-  RoomAsset.findByPk(roomId, {
+  RoomAsset.findByPk(roomAssetId, {
     include: [
       {
         model: Room,
@@ -99,23 +103,23 @@ exports.getRoomAssetByRoomId = (req, res) => {
         res.status(200).json(data);
       } else {
         res.status(404).send({
-          message: `Cannot find RoomAsset with roomId=${roomId}.`,
+          message: `Cannot find RoomAsset with roomAssetId=${roomAssetId}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving RoomAsset with roomId=" + roomId,
+        message: "Error retrieving RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
 
-// Update a RoomAsset by the roomId in the request
+// Update a RoomAsset by the roomAssetId in the request
 exports.updateRoomAsset = (req, res) => {
-  const roomId = req.params.roomId;
+  const roomAssetId = req.params.roomAssetId;
 
   RoomAsset.update(req.body, {
-    where: { roomId: roomId },
+    where: { roomAssetId: roomAssetId },
   })
     .then((num) => {
       if (num == 1) {
@@ -124,23 +128,23 @@ exports.updateRoomAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot update room asset with roomId=${roomId}. Maybe RoomAsset was not found or req.body is empty!`,
+          message: `Cannot update room asset with roomAssetId=${roomAssetId}. Maybe RoomAsset was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating RoomAsset with roomId=" + roomId,
+        message: "Error updating RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
 
-// Delete a RoomAsset with the specified roomId in the request
+// Delete a RoomAsset with the specified roomAssetId in the request
 exports.deleteRoomAsset = (req, res) => {
-  const roomId = req.params.roomId;
+  const roomAssetId = req.params.roomAssetId;
 
   RoomAsset.destroy({
-    where: { roomId: roomId },
+    where: { roomAssetId: roomAssetId },
   })
     .then((num) => {
       if (num == 1) {
@@ -149,13 +153,13 @@ exports.deleteRoomAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot delete room asset with roomId=${roomId}. Maybe RoomAsset was not found!`,
+          message: `Cannot delete room asset with roomAssetId=${roomAssetId}. Maybe RoomAsset was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete RoomAsset with roomId=" + roomId,
+        message: "Could not delete RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
