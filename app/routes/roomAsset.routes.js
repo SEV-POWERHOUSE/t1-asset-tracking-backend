@@ -10,7 +10,7 @@ module.exports = (app) => {
     router.get("/", [authenticate], roomAsset.getAllRoomAssets);
   
     // Retrieve a single RoomAsset by roomAssetId
-    router.get("/:roomAssetId", [authenticate], roomAsset.getRoomAssetByRoomId);
+    router.get("/:roomAssetId", [authenticate], roomAsset.getRoomAssetById);
   
     // Update a RoomAsset by roomAssetId
     router.put("/:roomAssetId", [authenticate], roomAsset.updateRoomAsset);

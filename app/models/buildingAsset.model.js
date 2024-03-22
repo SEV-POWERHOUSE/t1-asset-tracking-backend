@@ -8,20 +8,20 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      buildingId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "building",
-          key: "buildingId",
-        },
-      },
       serializedAssetId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
           model: "serializedAsset",
           key: "serializedAssetId",
+        },
+      },
+      buildingId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "building",
+          key: "buildingId",
         },
       },
       checkoutDate: {
