@@ -25,6 +25,15 @@ module.exports = (sequelize, Sequelize) => {
           key: "buildingId",
         },
       },
+      roomName: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${this.get("building")?.abbreviation} (${
+            this.roomNo
+          })`;
+        },
+        // Note: Since it's a virtual field, no setter is defined
+      },
     },
     {
       timestamps: false,
