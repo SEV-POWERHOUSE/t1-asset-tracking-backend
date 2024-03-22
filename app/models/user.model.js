@@ -37,22 +37,22 @@ module.exports = (sequelize, Sequelize) => {
       canEdit: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false, // Most users won't have dev permissions by default
+        defaultValue: false, // Most users won't have permissions by default
       },
       canArchive: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false, // Most users won't have dev permissions by default
+        defaultValue: false, // Most users won't have permissions by default
       },
       canActivate: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false, // Most users won't have dev permissions by default
+        defaultValue: false, // Most users won't have permissions by default
       },
       canDelete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false, // Most users won't have dev permissions by default
+        defaultValue: false, // Most users won't have permissions by default
       },
     },
     {
