@@ -13,7 +13,14 @@ exports.create = async (req, res) => {
 
   // Create a UserRole
   try {
-    const userRole = await UserRole.create({ name: req.body.name });
+    const userRole = await UserRole.create({
+      name: req.body.name,
+      defaultCanAdd: req.body.defaultCanAdd,
+      defaultCanEdit: req.body.defaultCanEdit,
+      defaultCanDelete: req.body.defaultCanDelete,
+      defaultCanArchive: req.body.defaultCanArchive,
+      defaultCanActivate: req.body.defaultCanActivate
+    });
     res.send(userRole);
   } catch (err) {
     res.status(500).send({
@@ -22,6 +29,7 @@ exports.create = async (req, res) => {
     });
   }
 };
+
 
 // Retrieve all UserRoles
 exports.findAll = async (req, res) => {
