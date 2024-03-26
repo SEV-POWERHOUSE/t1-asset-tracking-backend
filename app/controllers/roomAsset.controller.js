@@ -1,11 +1,17 @@
 const db = require("../models");
 const RoomAsset = db.roomAsset;
+const Room = db.room;
+const SerializedAsset = db.serializedAsset;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new RoomAsset
 exports.createRoomAsset = (req, res) => {
   // Validate request
-  if (!req.body.roomId || !req.body.serialAssetId) {
+  if (
+    !req.body.roomId ||
+    !req.body.serializedAssetId ||
+    !req.body.checkoutDate
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -15,7 +21,11 @@ exports.createRoomAsset = (req, res) => {
   // Create a RoomAsset
   const roomAsset = {
     roomId: req.body.roomId,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
+    checkoutDate: req.body.checkoutDate,
+    checkinDate: req.body.checkinDate,
+    expectedCheckinDate: req.body.expectedCheckinDate,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Save RoomAsset in the database
@@ -25,51 +35,91 @@ exports.createRoomAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the RoomAsset.",
+        message:
+          err.message || "Some error occurred while creating the RoomAsset.",
       });
     });
 };
 
 // Retrieve all RoomAssets from the database.
 exports.getAllRoomAssets = (req, res) => {
-  RoomAsset.findAll()
+  RoomAsset.findAll({
+    include: [
+      {
+        model: Room,
+        as: "room",
+        attributes: ["roomId", "roomNo", "buildingId", "activeStatus"],
+      },
+      {
+        model: SerializedAsset,
+        as: "serializedAsset",
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "serializedAssetName",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving room assets.",
+        message:
+          err.message || "Some error occurred while retrieving room assets.",
       });
     });
 };
 
-// Find a single RoomAsset with a roomId
-exports.getRoomAssetByRoomId = (req, res) => {
-  const roomId = req.params.roomId;
+// Find a single RoomAsset with a roomAssetId
+exports.getRoomAssetById = (req, res) => {
+  const roomAssetId = req.params.roomAssetId;
 
-  RoomAsset.findByPk(roomId)
+  RoomAsset.findByPk(roomAssetId, {
+    include: [
+      {
+        model: Room,
+        as: "room",
+        attributes: ["roomId", "roomNo", "buildingId", "activeStatus"],
+      },
+      {
+        model: SerializedAsset,
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
       } else {
         res.status(404).send({
-          message: `Cannot find RoomAsset with roomId=${roomId}.`,
+          message: `Cannot find RoomAsset with roomAssetId=${roomAssetId}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving RoomAsset with roomId=" + roomId,
+        message: "Error retrieving RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
 
-// Update a RoomAsset by the roomId in the request
+// Update a RoomAsset by the roomAssetId in the request
 exports.updateRoomAsset = (req, res) => {
-  const roomId = req.params.roomId;
+  const roomAssetId = req.params.roomAssetId;
 
   RoomAsset.update(req.body, {
-    where: { roomId: roomId },
+    where: { roomAssetId: roomAssetId },
   })
     .then((num) => {
       if (num == 1) {
@@ -78,23 +128,23 @@ exports.updateRoomAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot update room asset with roomId=${roomId}. Maybe RoomAsset was not found or req.body is empty!`,
+          message: `Cannot update room asset with roomAssetId=${roomAssetId}. Maybe RoomAsset was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating RoomAsset with roomId=" + roomId,
+        message: "Error updating RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
 
-// Delete a RoomAsset with the specified roomId in the request
+// Delete a RoomAsset with the specified roomAssetId in the request
 exports.deleteRoomAsset = (req, res) => {
-  const roomId = req.params.roomId;
+  const roomAssetId = req.params.roomAssetId;
 
   RoomAsset.destroy({
-    where: { roomId: roomId },
+    where: { roomAssetId: roomAssetId },
   })
     .then((num) => {
       if (num == 1) {
@@ -103,13 +153,13 @@ exports.deleteRoomAsset = (req, res) => {
         });
       } else {
         res.status(404).send({
-          message: `Cannot delete room asset with roomId=${roomId}. Maybe RoomAsset was not found!`,
+          message: `Cannot delete room asset with roomAssetId=${roomAssetId}. Maybe RoomAsset was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete RoomAsset with roomId=" + roomId,
+        message: "Could not delete RoomAsset with roomAssetId=" + roomAssetId,
       });
     });
 };
@@ -121,11 +171,14 @@ exports.deleteAllRoomAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} RoomAssets were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} RoomAssets were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all room assets.",
+        message:
+          err.message || "Some error occurred while removing all room assets.",
       });
     });
 };

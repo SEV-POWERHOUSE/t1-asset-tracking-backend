@@ -12,6 +12,26 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         unique: true, // Ensure email is unique across all records
       },
+      defaultCanAdd: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      defaultCanEdit: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      defaultCanArchive: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      defaultCanActivate: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      defaultCanDelete: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
     },
     {
       timestamps: false,

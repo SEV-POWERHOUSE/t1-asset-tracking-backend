@@ -1,10 +1,11 @@
 const db = require("../models");
+const AssetProfile = db.assetProfile;
 const SerializedAsset = db.serializedAsset;
 
 // Create and Save a new SerializedAsset
 exports.createSerializedAsset = (req, res) => {
   // Validate request for required fields
-  if (!req.body.serializedNumber || !req.body.profileId || !req.body.notes) {
+  if (!req.body.serialNumber || !req.body.profileId || !req.body.notes) {
     res.status(400).send({
       message:
         "Content cannot be empty! Serialized number, profile ID, and notes are required.",
@@ -14,9 +15,11 @@ exports.createSerializedAsset = (req, res) => {
 
   // Prepare data to create a SerializedAsset
   const serializedAssetData = {
-    serializedNumber: req.body.serializedNumber,
+    serialNumber: req.body.serialNumber,
     profileId: req.body.profileId,
     notes: req.body.notes,
+    activeStatus: req.body.activeStatus,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Create a SerializedAsset in the database
@@ -35,7 +38,15 @@ exports.createSerializedAsset = (req, res) => {
 
 // Retrieve all SerializedAssets from the database.
 exports.getAllSerializedAssets = (req, res) => {
-  SerializedAsset.findAll()
+  SerializedAsset.findAll({
+    include: [
+      {
+        model: AssetProfile,
+        as: "assetProfile",
+        attributes: ["profileId", "profileName", "typeId", "desc"],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
@@ -52,7 +63,15 @@ exports.getAllSerializedAssets = (req, res) => {
 exports.getSerializedAssetById = (req, res) => {
   const serializedAssetId = req.params.serializedAssetId;
 
-  SerializedAsset.findByPk(serializedAssetId)
+  SerializedAsset.findByPk(serializedAssetId, {
+    include: [
+      {
+        model: AssetProfile,
+        as: "assetProfile",
+        attributes: ["profileId", "profileName", "typeId", "desc"],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -132,11 +151,9 @@ exports.deleteAllSerializedAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res
-        .status(200)
-        .send({
-          message: `${nums} SerializedAssets were deleted successfully!`,
-        });
+      res.status(200).send({
+        message: `${nums} SerializedAssets were deleted successfully!`,
+      });
     })
     .catch((err) => {
       res.status(500).send({

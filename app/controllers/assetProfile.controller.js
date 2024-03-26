@@ -5,7 +5,7 @@ const AssetType = db.assetType;
 // Create and Save a new AssetProfile
 exports.createAssetProfile = (req, res) => {
   // Validate request
-  if (!req.body.typeId || !req.body.profileName || req.body.activeStatus) {
+  if (!req.body.typeId || !req.body.profileName) {
     res.status(400).send({
       message:
         "Content cannot be empty! Type ID and Profile Name are required.",
@@ -36,57 +36,58 @@ exports.createAssetProfile = (req, res) => {
 
 // Bulk create assetProfiles from tsv
 exports.bulkCreateAssetProfile = (req, res) => {
-
   // tsv will be read in as hex values
-  // convert function that takes hex => utf8 characters 
-  const convert = function(tsvFile) {
-    const convert = (from, to) => (str) => Buffer.from(str, from).toString(to)
-    const hexToUtf8 = convert('hex', 'utf8')
-    let tsvData = hexToUtf8(tsvFile.data).split('\r\n')
-    console.log(tsvData)
-    let tsvRows = []
+  // convert function that takes hex => utf8 characters
+  const convert = function (tsvFile) {
+    const convert = (from, to) => (str) => Buffer.from(str, from).toString(to);
+    const hexToUtf8 = convert("hex", "utf8");
+    let tsvData = hexToUtf8(tsvFile.data).split("\r\n");
+    console.log(tsvData);
+    let tsvRows = [];
     tsvData.forEach((data) => {
-      tsvRows.push(data.split('\t'))
-    })
-    let data = []
+      tsvRows.push(data.split("\t"));
+    });
+    let data = [];
     for (let i = 1; i < tsvRows.length; ++i) {
-      let dict = {}
+      let dict = {};
       for (let j = 0; j < tsvRows[i].length; ++j) {
-        dict[tsvRows[0][j]] = tsvRows[i][j]
+        dict[tsvRows[0][j]] = tsvRows[i][j];
       }
-      data.push(dict)
+      data.push(dict);
     }
-    return data
-  }
+    return data;
+  };
 
   if (!req.files || !req.files.file) {
-    res.status(404).send('File not found')
-    return
+    res.status(404).send("File not found");
+    return;
   }
-  
-  if (req.files.file.mimetype !== 'text/tab-separated-values') {
+
+  if (req.files.file.mimetype !== "text/tab-separated-values") {
     res.status(422).send(
       util.apiResponse(0, toast.INVALID_FILE_FORMAT, {
-        err: 'File format is not valid',
-      }),
+        err: "File format is not valid",
+      })
     );
-    return
+    return;
   }
 
-  const tsvFile = req.files.file
-  data = convert(tsvFile) // pass tsv file to be converted
-  console.log(data)
+  const tsvFile = req.files.file;
+  data = convert(tsvFile); // pass tsv file to be converted
+  console.log(data);
 
   AssetProfile.bulkCreate(data)
-    .then(profiles => {
+    .then((profiles) => {
       res.status(201).json(profiles);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: error.message || "Some error occurred while bulk creating the AssetProfiles."
+        message:
+          error.message ||
+          "Some error occurred while bulk creating the AssetProfiles.",
       });
-  });
-}
+    });
+};
 
 // Retrieve all AssetProfiles from the database.
 exports.getAllAssetProfiles = (req, res) => {

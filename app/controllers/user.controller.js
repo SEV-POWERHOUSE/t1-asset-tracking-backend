@@ -20,6 +20,11 @@ exports.create = (req, res) => {
     email: req.body.email,
     userRoleId: req.body.userRoleId,
     devPermission: req.body.devPermission,
+    canAdd: req.body.canAdd,
+    canEdit: req.body.canEdit,
+    canArchive: req.body.canArchive,
+    canArchive: req.body.canArchive,
+    canDelete: req.body.canDelete,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
   };
@@ -132,36 +137,53 @@ exports.update = (req, res) => {
     });
 };
 
-exports.updateRole = (req, res) => {
+exports.updateRole = async (req, res) => {
   const id = req.params.id;
   const userRoleId = req.body.userRoleId;
 
-  console.log(`Server: Received updateRole request for user ${id} with role ${userRoleId}`, req.body);
+  console.log(
+    `Server: Received updateRole request for user ${id} with role ${userRoleId}`,
+    req.body
+  );
 
   console.log(`Updating user ${id} to role ${userRoleId}`);
 
-  User.update(
-    { userRoleId: userRoleId },
-    {
-      where: { id: id },
-    }
-  )
-    .then((num) => {
-      if (num == 1) {
-        res.send({ message: "User's role was updated successfully." });
-      } else {
-        res.send({
-          message: `Cannot update User's role with id=${id}. Maybe User was not found or req.body is empty!`,
-        });
+  try {
+    const num = await User.update(
+      { userRoleId: userRoleId },
+      {
+        where: { id: id },
       }
-    })
-    .catch((err) => {
-      console.error("Error updating User's role:", err);
-      res
-        .status(500)
-        .send({ message: "Error updating User's role with id=" + id });
-    });
+    );
+    if (num == 1) {
+      // If the user's role was updated successfully, update their permissions
+      const userRole = await UserRole.findByPk(userRoleId);
+      if (userRole) {
+        await User.update(
+          {
+            canAdd: userRole.defaultCanAdd,
+            canEdit: userRole.defaultCanEdit,
+            canDelete: userRole.defaultCanDelete,
+            canArchive: userRole.defaultCanArchive,
+            canActivate: userRole.defaultCanActivate,
+          },
+          { where: { id: id } }
+        );
+      }
+      res.send({ message: "User's role and permissions were updated successfully." });
+    } else {
+      res.send({
+        message: `Cannot update User's role with id=${id}. Maybe User was not found or req.body is empty!`,
+      });
+    }
+  } catch (err) {
+    console.error("Error updating User's role:", err);
+    res
+      .status(500)
+      .send({ message: "Error updating User's role with id=" + id });
+  }
 };
+
 
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {

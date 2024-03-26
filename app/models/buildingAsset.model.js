@@ -8,6 +8,14 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
+      serializedAssetId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "serializedAsset",
+          key: "serializedAssetId",
+        },
+      },
       buildingId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,13 +24,22 @@ module.exports = (sequelize, Sequelize) => {
           key: "buildingId",
         },
       },
-      serializedAssetId: {
-        type: Sequelize.INTEGER,
+      checkoutDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      expectedCheckinDate: {
+        type: Sequelize.DATE,
         allowNull: true,
-        references: {
-          model: "serializedAsset",
-          key: "serializedAssetId",
-        },
+      },
+      checkinDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      checkoutStatus: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     {

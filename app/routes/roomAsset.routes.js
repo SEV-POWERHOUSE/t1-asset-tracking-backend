@@ -9,14 +9,14 @@ module.exports = (app) => {
     // Retrieve all RoomAssets
     router.get("/", [authenticate], roomAsset.getAllRoomAssets);
   
-    // Retrieve a single RoomAsset by roomId
-    router.get("/:roomId", [authenticate], roomAsset.getRoomAssetByRoomId);
+    // Retrieve a single RoomAsset by roomAssetId
+    router.get("/:roomAssetId", [authenticate], roomAsset.getRoomAssetById);
   
-    // Update a RoomAsset by roomId
-    router.put("/:roomId", [authenticate], roomAsset.updateRoomAsset);
+    // Update a RoomAsset by roomAssetId
+    router.put("/:roomAssetId", [authenticate], roomAsset.updateRoomAsset);
   
-    // Delete a RoomAsset by roomId
-    router.delete("/:roomId", [authenticate], roomAsset.deleteRoomAsset);
+    // Delete a RoomAsset by roomAssetId
+    router.delete("/:roomAssetId", [authenticate], roomAsset.deleteRoomAsset);
   
     // Delete all RoomAssets
     router.delete("/", [authenticate], roomAsset.deleteAllRoomAssets);

@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       roomNo: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
@@ -24,6 +24,15 @@ module.exports = (sequelize, Sequelize) => {
           model: "building",
           key: "buildingId",
         },
+      },
+      roomName: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${this.get("building")?.abbreviation} (${
+            this.roomNo
+          })`;
+        },
+        // Note: Since it's a virtual field, no setter is defined
       },
     },
     {

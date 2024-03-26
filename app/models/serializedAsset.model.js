@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      serializedNumber: {
+      serialNumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -24,7 +24,26 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      activeStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
+      serializedAssetName: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${this.get("assetProfile")?.profileName} (${
+            this.serialNumber
+          })`;
+        },
+        // Note: Since it's a virtual field, no setter is defined
+      },
+      checkoutStatus: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
+
     {
       timestamps: false,
       freezeTableName: true,

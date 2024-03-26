@@ -4,7 +4,7 @@ const AssetCategory = db.assetCategory;
 // Create and Save a new AssetCategory
 exports.createAssetCategory = (req, res) => {
   // Validate request
-  if (!req.body.categoryName || req.body.activeStatus) {
+  if (!req.body.categoryName) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -27,64 +27,66 @@ exports.createAssetCategory = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the AssetCategory.",
+          err.message ||
+          "Some error occurred while creating the AssetCategory.",
       });
     });
 };
 
 // Bulk create assetCategories from tsv
 exports.bulkCreateAssetCategory = (req, res) => {
-
   // tsv will be read in as hex values
-  // convert function that takes hex => utf8 characters 
-  const convert = function(tsvFile) {
-    const convert = (from, to) => (str) => Buffer.from(str, from).toString(to)
-    const hexToUtf8 = convert('hex', 'utf8')
-    let tsvData = hexToUtf8(tsvFile.data).split('\r\n')
-    console.log(tsvData)
-    let tsvRows = []
+  // convert function that takes hex => utf8 characters
+  const convert = function (tsvFile) {
+    const convert = (from, to) => (str) => Buffer.from(str, from).toString(to);
+    const hexToUtf8 = convert("hex", "utf8");
+    let tsvData = hexToUtf8(tsvFile.data).split("\r\n");
+    console.log(tsvData);
+    let tsvRows = [];
     tsvData.forEach((data) => {
-      tsvRows.push(data.split('\t'))
-    })
-    let data = []
+      tsvRows.push(data.split("\t"));
+    });
+    let data = [];
     for (let i = 1; i < tsvRows.length; ++i) {
-      let dict = {}
+      let dict = {};
       for (let j = 0; j < tsvRows[i].length; ++j) {
-        dict[tsvRows[0][j]] = tsvRows[i][j]
+        dict[tsvRows[0][j]] = tsvRows[i][j];
       }
-      data.push(dict)
+      data.push(dict);
     }
-    return data
-  }
+    return data;
+  };
 
   if (!req.files || !req.files.file) {
-    res.status(404).send('File not found')
-    return
+    res.status(404).send("File not found");
+    return;
   }
-  
-  if (req.files.file.mimetype !== 'text/tab-separated-values') {
+
+  if (req.files.file.mimetype !== "text/tab-separated-values") {
     res.status(422).send(
       util.apiResponse(0, toast.INVALID_FILE_FORMAT, {
-        err: 'File format is not valid',
-      }),
+        err: "File format is not valid",
+      })
     );
-    return
+    return;
   }
 
-  const tsvFile = req.files.file
-  data = convert(tsvFile) // pass tsv file to be converted
-  console.log(data)
+  const tsvFile = req.files.file;
+  data = convert(tsvFile); // pass tsv file to be converted
+  console.log(data);
 
   AssetCategory.bulkCreate(data)
-    .then(categories => {
+    .then((categories) => {
       res.status(201).json(categories);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).send({
-        message: error.message || "Some error occurred while bulk creating the AssetCategories."
+        message:
+          error.message ||
+          "Some error occurred while bulk creating the AssetCategories.",
       });
-  });
-}
+    });
+};
 
 // Retrieve all AssetCategories from the database.
 exports.getAllAssetCategories = (req, res) => {
@@ -111,8 +113,8 @@ exports.getCategoryByName = (req, res) => {
 
   AssetCategory.findOne({
     where: {
-      categoryName: req.query.categoryName
-    }
+      categoryName: req.query.categoryName,
+    },
   })
     .then((category) => {
       if (!category) {
@@ -209,7 +211,9 @@ exports.deleteAllAssetCategories = (req, res) => {
     .then((nums) => {
       res
         .status(200)
-        .send({ message: `${nums} AssetCategories were deleted successfully!` });
+        .send({
+          message: `${nums} AssetCategories were deleted successfully!`,
+        });
     })
     .catch((err) => {
       res.status(500).send({

@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Barcode
 exports.createBarcode = (req, res) => {
   // Validate request
-  if (!req.body.barcodeId || !req.body.barcode || !req.body.serialAssetId) {
+  if (!req.body.barcodeId || !req.body.barcode || !req.body.serializedAssetId) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -16,7 +16,7 @@ exports.createBarcode = (req, res) => {
   const barcode = {
     barcodeId: req.body.barcodeId,
     barcode: req.body.barcode,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save Barcode in the database
@@ -26,7 +26,8 @@ exports.createBarcode = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the Barcode.",
+        message:
+          err.message || "Some error occurred while creating the Barcode.",
       });
     });
 };
@@ -39,7 +40,8 @@ exports.getAllBarcodes = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving barcodes.",
+        message:
+          err.message || "Some error occurred while retrieving barcodes.",
       });
     });
 };
@@ -122,11 +124,14 @@ exports.deleteAllBarcodes = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Barcodes were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Barcodes were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all barcodes.",
+        message:
+          err.message || "Some error occurred while removing all barcodes.",
       });
     });
 };

@@ -25,7 +25,8 @@ exports.createLogType = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the LogType.",
+        message:
+          err.message || "Some error occurred while creating the LogType.",
       });
     });
 };
@@ -38,7 +39,8 @@ exports.getAllLogTypes = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving log types.",
+        message:
+          err.message || "Some error occurred while retrieving log types.",
       });
     });
 };
@@ -121,11 +123,14 @@ exports.deleteAllLogTypes = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} LogTypes were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} LogTypes were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all log types.",
+        message:
+          err.message || "Some error occurred while removing all log types.",
       });
     });
 };

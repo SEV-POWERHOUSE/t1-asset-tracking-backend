@@ -16,22 +16,6 @@ module.exports = (sequelize, Sequelize) => {
           key: "serializedAssetId",
         },
       },
-      checkoutDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      checkinDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      expectedCheckinDate: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-      checkoutType: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       personId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -39,6 +23,23 @@ module.exports = (sequelize, Sequelize) => {
           model: "person",
           key: "personId",
         },
+      },
+      checkoutDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      expectedCheckinDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      checkinDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      checkoutStatus: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     {

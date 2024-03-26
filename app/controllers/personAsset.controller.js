@@ -1,11 +1,17 @@
 const db = require("../models");
 const PersonAsset = db.personAsset;
+const Person = db.person;
+const SerializedAsset = db.serializedAsset;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new PersonAsset
 exports.createPersonAsset = (req, res) => {
   // Validate request
-  if (!req.body.serialAssetId || !req.body.personAssetId || !req.body.checkoutDate || !req.body.checkinDate || !req.body.checkoutType || !req.body.personId) {
+  if (
+    !req.body.serializedAssetId ||
+    !req.body.personId ||
+    !req.body.checkoutDate
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -14,13 +20,12 @@ exports.createPersonAsset = (req, res) => {
 
   // Create a PersonAsset
   const personAsset = {
-    serialAssetId: req.body.serialAssetId,
-    personAssetId: req.body.personAssetId,
+    personId: req.body.personId,
+    serializedAssetId: req.body.serializedAssetId,
     checkoutDate: req.body.checkoutDate,
     checkinDate: req.body.checkinDate,
     expectedCheckinDate: req.body.expectedCheckinDate,
-    checkoutType: req.body.checkoutType,
-    personId: req.body.personId,
+    checkoutStatus: req.body.checkoutStatus,
   };
 
   // Save PersonAsset in the database
@@ -30,20 +35,49 @@ exports.createPersonAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while creating the PersonAsset.",
+        message:
+          err.message || "Some error occurred while creating the PersonAsset.",
       });
     });
 };
 
 // Retrieve all PersonAssets from the database.
 exports.getAllPersonAssets = (req, res) => {
-  PersonAsset.findAll()
+  PersonAsset.findAll({
+    include: [
+      {
+        model: Person,
+        as: "person",
+        attributes: [
+          "personId",
+          "fName",
+          "lName",
+          "email",
+          "idNumber",
+          "activeStatus",
+        ],
+      },
+      {
+        model: SerializedAsset,
+        as: "serializedAsset",
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "serializedAssetName",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving person assets.",
+        message:
+          err.message || "Some error occurred while retrieving person assets.",
       });
     });
 };
@@ -52,7 +86,31 @@ exports.getAllPersonAssets = (req, res) => {
 exports.getPersonAssetById = (req, res) => {
   const personAssetId = req.params.personAssetId;
 
-  PersonAsset.findByPk(personAssetId)
+  PersonAsset.findByPk(personAssetId, {
+    include: [
+      {
+        model: Person,
+        attributes: [
+          "personId",
+          "fName",
+          "lName",
+          "email",
+          "idNumber",
+          "activeStatus",
+        ],
+      },
+      {
+        model: SerializedAsset,
+        attributes: [
+          "serializedAssetId",
+          "serialNumber",
+          "profileId",
+          "notes",
+          "activeStatus",
+        ],
+      },
+    ],
+  })
     .then((data) => {
       if (data) {
         res.status(200).json(data);
@@ -64,7 +122,8 @@ exports.getPersonAssetById = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving PersonAsset with personAssetId=" + personAssetId,
+        message:
+          "Error retrieving PersonAsset with personAssetId=" + personAssetId,
       });
     });
 };
@@ -89,7 +148,8 @@ exports.updatePersonAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating PersonAsset with personAssetId=" + personAssetId,
+        message:
+          "Error updating PersonAsset with personAssetId=" + personAssetId,
       });
     });
 };
@@ -114,7 +174,8 @@ exports.deletePersonAsset = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete PersonAsset with personAssetId=" + personAssetId,
+        message:
+          "Could not delete PersonAsset with personAssetId=" + personAssetId,
       });
     });
 };
@@ -126,11 +187,15 @@ exports.deleteAllPersonAssets = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} PersonAssets were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} PersonAssets were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all person assets.",
+        message:
+          err.message ||
+          "Some error occurred while removing all person assets.",
       });
     });
 };

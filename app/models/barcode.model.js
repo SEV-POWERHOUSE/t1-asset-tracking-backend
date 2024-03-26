@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      serialAssetId: {
+      serializedAssetId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

@@ -5,7 +5,13 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Lease
 exports.createLease = (req, res) => {
   // Validate request
-  if (!req.body.leaseId || !req.body.term || !req.body.endDate || !req.body.length || !req.body.serialAssetId) {
+  if (
+    !req.body.leaseId ||
+    !req.body.term ||
+    !req.body.endDate ||
+    !req.body.length ||
+    !req.body.serializedAssetId
+  ) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -18,7 +24,7 @@ exports.createLease = (req, res) => {
     term: req.body.term,
     endDate: req.body.endDate,
     length: req.body.length,
-    serialAssetId: req.body.serialAssetId,
+    serializedAssetId: req.body.serializedAssetId,
   };
 
   // Save Lease in the database
@@ -124,11 +130,14 @@ exports.deleteAllLeases = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.status(200).send({ message: `${nums} Leases were deleted successfully!` });
+      res
+        .status(200)
+        .send({ message: `${nums} Leases were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all leases.",
+        message:
+          err.message || "Some error occurred while removing all leases.",
       });
     });
 };

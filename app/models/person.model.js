@@ -19,10 +19,27 @@ module.exports = (sequelize, Sequelize) => {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true, // Ensure email is unique across all records
       },
       idNumber: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      activeStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
+      fullName: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${this.fName} ${this.lName}`;
+        },
+      },
+      fullNameWithId: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${this.fName} ${this.lName} (${this.idNumber})`;
+        },
       },
     },
     {
