@@ -75,6 +75,11 @@ exports.login = async (req, res) => {
           email: email,
           userRoleId: data ? data.userRoleId : null,
           devPermission: false,
+          canAdd: false,
+          canEdit: false,
+          canDelete: false,
+          canArchive: false,
+          canActivate: false,
         };
       }
     })
@@ -200,6 +205,11 @@ exports.login = async (req, res) => {
           userId: user.id,
           userRoleId: user.userRoleId,
           devPermission: user.devPermission,
+          canAdd: user.canAdd,
+          canEdit: user.canEdit,
+          canDelete: user.canDelete,
+          canArchive: user.canArchive,
+          canActivate: user.canActivate,
           token: token,
           // refresh_token: user.refresh_token,
           // expiration_date: user.expiration_date

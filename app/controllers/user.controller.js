@@ -23,7 +23,7 @@ exports.create = (req, res) => {
     canAdd: req.body.canAdd,
     canEdit: req.body.canEdit,
     canArchive: req.body.canArchive,
-    canArchive: req.body.canArchive,
+    canActivate: req.body.canActivate,
     canDelete: req.body.canDelete,
     // refresh_token: req.body.refresh_token,
     // expiration_date: req.body.expiration_date
