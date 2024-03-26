@@ -4,19 +4,21 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new ProfileData
 exports.createProfileData = (req, res) => {
+  
   // Validate request
-  if (!req.body.profileId || !req.body.field) {
+  if ( !req.body.field || !req.body.data || !req.body.profileId) {
+    console.log("Received request body:", req.body)
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: `Content can not be empty!  Field: ${field}, Data: ${data}, Profile ID: ${ProfileId}`,
     });
     return;
   }
 
   // Create a ProfileData
   const profileData = {
-    profileId: req.body.profileId,
     field: req.body.field,
     data: req.body.data || null,
+    profileId: req.body.profileId,
   };
 
   // Save ProfileData in the database

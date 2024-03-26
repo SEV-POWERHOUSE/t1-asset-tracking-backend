@@ -10,12 +10,12 @@ module.exports = (sequelize, Sequelize) => {
       },
       // Name of the data field
       field: {
-          type: Sequelize.TEXT,
-          allowNull: true,
+          type: Sequelize.STRING,
+          allowNull: false,
       },
       // Data field for asset data that needs to be saved
       data: {
-          type: Sequelize.TEXT,
+          type: Sequelize.STRING,
           allowNull: true,
       },
       profileId: {
